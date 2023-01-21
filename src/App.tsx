@@ -63,12 +63,26 @@
 import Pages from "./assets/pages/Pages";
 import Login from "./assets/pages/Login";
 import Signup from "./assets/pages/Signup";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   //? temporary isloggedin variable
   let isLoggedIn = false;
 
-  return <div className="font-mono">{isLoggedIn ? <Pages /> : <Login />}</div>;
+  return (
+    <div className="font-mono">
+      <>
+        {isLoggedIn ? (
+          <Pages />
+        ) : (
+          <Routes>
+            <Route index path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        )}
+      </>
+    </div>
+  );
 }
 
 export default App;

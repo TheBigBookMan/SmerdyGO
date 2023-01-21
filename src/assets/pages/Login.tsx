@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [formDetails, setFormDetails] = useState<UserForm>({
@@ -44,9 +45,11 @@ const Login = () => {
           >
             Login
           </button>
-          <button className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px]">
-            Signup
-          </button>
+          <Link to="/signup">
+            <button className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px]">
+              Signup
+            </button>
+          </Link>
         </div>
       </form>
     </div>
