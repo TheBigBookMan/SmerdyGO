@@ -17,6 +17,8 @@ const Login = () => {
     console.log(formDetails);
   };
 
+  //TODO NEED TO UPDATE THE LINK FROM LOGIN AND SIGNUP TO BE NAV DIRECT ONCE MUTATIONS ARE MADE CORRECTLY
+
   return (
     <div className="flex flex-col gap-20 justify-center items-center h-screen bg-gradient-to-br from-amber-100 to-red-100">
       <h1 className="font-bold text-6xl">Welcome to SmerdyGO</h1>
@@ -39,12 +41,14 @@ const Login = () => {
           className="pl-2 p-1 rounded-lg"
         />
         <div className="flex gap-10">
-          <button
-            onClick={(e) => submitLogin(e)}
-            className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px] "
-          >
-            Login
-          </button>
+          <Link to="/pages">
+            <button
+              onClick={(e) => submitLogin(e)}
+              className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px] "
+            >
+              Login
+            </button>
+          </Link>
           <Link to="/signup">
             <button className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px]">
               Signup

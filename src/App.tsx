@@ -67,7 +67,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   //? temporary isloggedin variable
-  let isLoggedIn = false;
+  let isLoggedIn = true;
 
   return (
     <div className="font-mono">

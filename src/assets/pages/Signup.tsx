@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 const Signup = () => {
   const [formDetails, setFormDetails] = useState<UserForm>({
@@ -18,6 +19,9 @@ const Signup = () => {
   };
   return (
     <div className="flex flex-col gap-20 justify-center items-center h-screen bg-gradient-to-br from-amber-100 to-red-100">
+      <Link to="/">
+        <BsArrowLeftShort className="absolute top-10 left-10 text-6xl hover:border-2 hover:rounded-2xl hover:shadow-lg hover:border-gray-500 transition-all cursor-pointer" />
+      </Link>
       <h1 className="font-bold text-6xl">Signup</h1>
       <form className="flex flex-col gap-10 items-center">
         <input
