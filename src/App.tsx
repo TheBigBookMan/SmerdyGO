@@ -1,6 +1,7 @@
 //? This is a kind of "store everything" type thing for myself only
 //TODO frontend- maybe use some threejs or something for something cool, do want to make it look aesthetic as well
 //TODO backend- graphql/apollo, mongodb, prisma- just to store todo things etc, might need to plan database architecture
+//TODO might use NextJS as having a backend running fast would be super handy, should take that udemy course on to learn more
 //TODO might set up a script so this deployed site opens every time i open up my laptop/at night before bed at specific time
 
 //? have a side menu bar with tabs- tasks, ideas, quick notes, people details, skills to learn, books read/to read, running data
@@ -20,11 +21,20 @@
 
 //* Running data- strava API and could have graphs etc of my running habits using a D3 library or something
 
+// * PB page for personal best stuff
+
+//* Can do a PB segments for strava etc and running
+
+//* Can look at adding in apges that take data from popular apps used for all kinds of things- strava: running, myhealthapp: health, myfitnesspal: food
+
+//* Have little widgets on the side that can be things like news (filter types- sport, economics, world), live sports (choose sports you want), stock prices (choose crypto or stock prices to be updated)
+
 //TODO many more automation things can put in to make it easier to use for daily stats and life
 
 //TODO can add mini picturesin for things as well or logos if want- make customizable
 
 //TODO use the nice colours i like- light yellow, light blue, light red etc
+//? kinda like this screenshot - https://bradfrost.com/blog/post/slowly-falling-in-love-with-notion/
 
 //TODO layout like Notion
 
@@ -50,12 +60,15 @@
 
 //!!!!! can literally get API for most things and just get the data in here once "connected/authorized" and then store it in database and then can just update end of everyday or something
 
+import Pages from "./assets/pages/Pages";
+import Login from "./assets/pages/Login";
+import Signup from "./assets/pages/Signup";
+
 function App() {
-  return (
-    <div>
-      <h1>SmerdyGO</h1>
-    </div>
-  );
+  //? temporary isloggedin variable
+  let isLoggedIn = false;
+
+  return <div>{isLoggedIn ? <Pages /> : <Login />}</div>;
 }
 
 export default App;
