@@ -68,7 +68,7 @@ function App() {
   //? temporary isloggedin variable
   let isLoggedIn = false;
 
-  return <div>{isLoggedIn ? <Pages /> : <Login />}</div>;
+  return <div className="font-mono">{isLoggedIn ? <Pages /> : <Login />}</div>;
 }
 
 export default App;
