@@ -60,28 +60,35 @@
 
 //!!!!! can literally get API for most things and just get the data in here once "connected/authorized" and then store it in database and then can just update end of everyday or something
 
+import Header from "./assets/components/common/Header/Header";
 import Pages from "./assets/pages/Pages";
 import Login from "./assets/pages/Login";
 import Signup from "./assets/pages/Signup";
 import { Routes, Route } from "react-router-dom";
+import { ProSidebarProvider } from "react-pro-sidebar";
 
 function App() {
   //? temporary isloggedin variable
   let isLoggedIn = true;
 
   return (
-    <div className="font-mono">
-      <>
-        {isLoggedIn ? (
-          <Pages />
-        ) : (
-          <Routes>
-            <Route index path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        )}
-      </>
-    </div>
+    <ProSidebarProvider>
+      <div className="font-mono">
+        <>
+          {isLoggedIn ? (
+            <div className="flex">
+              <Header />
+              <Pages />
+            </div>
+          ) : (
+            <Routes>
+              <Route index path="/" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          )}
+        </>
+      </div>
+    </ProSidebarProvider>
   );
 }
 

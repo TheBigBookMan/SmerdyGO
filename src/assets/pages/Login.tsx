@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div className="flex flex-col gap-20 justify-center items-center h-screen bg-gradient-to-br from-amber-100 to-red-100">
       <h1 className="font-bold text-6xl">Welcome to SmerdyGO</h1>
-      <p>Sign up. Track anything. Update everything.</p>
+      <p>Add anything. Track everything. Enjoy updating.</p>
       <form className="flex flex-col gap-10 items-center">
         <input
           onChange={(e) => handleChange(e)}
