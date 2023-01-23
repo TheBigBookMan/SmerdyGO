@@ -9,11 +9,11 @@ const NavBar = () => {
           <>
             {/* <MenuItem className="bg-green-100">{item.name}</MenuItem> */}
             {!item.sub ? (
-              <MenuItem className="bg-green-100">{item.name}</MenuItem>
+              <MenuItem className="bg-emerald-100">{item.name}</MenuItem>
             ) : (
-              <SubMenu className="bg-green-100" label={item.name}>
+              <SubMenu className="bg-emerald-100" label={item.name}>
                 {item.subNames.map((subname) => (
-                  <MenuItem className="bg-green-100">{subname}</MenuItem>
+                  <MenuItem className="bg-emerald-100">{subname}</MenuItem>
                 ))}
               </SubMenu>
             )}
