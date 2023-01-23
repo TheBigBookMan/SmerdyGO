@@ -44,13 +44,13 @@ const Login = () => {
           <Link to="/pages">
             <button
               onClick={(e) => submitLogin(e)}
-              className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px] "
+              className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-emerald-200 to-green-200 p-4 rounded-xl w-[120px] h-[50px] "
             >
               Login
             </button>
           </Link>
           <Link to="/signup">
-            <button className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-cyan-300 to-blue-300 p-4 rounded-xl w-[120px] h-[50px]">
+            <button className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-emerald-200 to-green-200 p-4 rounded-xl w-[120px] h-[50px]">
               Signup
             </button>
           </Link>

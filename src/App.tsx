@@ -61,6 +61,7 @@
 //!!!!! can literally get API for most things and just get the data in here once "connected/authorized" and then store it in database and then can just update end of everyday or something
 
 import Header from "./assets/components/common/Header/Header";
+import SideBar from "./assets/components/common/SideBar/SideBar";
 import Pages from "./assets/pages/Pages";
 import Login from "./assets/pages/Login";
 import Signup from "./assets/pages/Signup";
@@ -73,12 +74,15 @@ function App() {
 
   return (
     <ProSidebarProvider>
-      <div className="font-mono">
+      <div className="font-mono w-screen">
         <>
           {isLoggedIn ? (
             <div className="flex">
-              <Header />
-              <Pages />
+              <SideBar />
+              <div className="flex flex-col w-full">
+                <Header />
+                <Pages />
+              </div>
             </div>
           ) : (
             <Routes>
