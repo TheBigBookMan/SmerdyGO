@@ -74,7 +74,7 @@ function App() {
 
   return (
     <ProSidebarProvider>
-      <div className="font-mono w-screen">
+      <div className="font-mono w-screen h-screen">
         <>
           {isLoggedIn ? (
             <div className="flex">
