@@ -11,13 +11,17 @@ const NavBar = () => {
             {/* <MenuItem className="bg-green-100">{item.name}</MenuItem> */}
             {!item.sub ? (
               <Link to={`/${item.name.toLowerCase()}`}>
-                <MenuItem className="text-sm">{item.name}</MenuItem>
+                <MenuItem className="text-sm">
+                  {item.name.toLowerCase()}
+                </MenuItem>
               </Link>
             ) : (
-              <SubMenu className="text-sm" label={item.name}>
+              <SubMenu className="text-sm" label={item.name.toLowerCase()}>
                 {item.subNames.map((subname) => (
                   <Link to={`/${subname.toLowerCase()}`}>
-                    <MenuItem className="text-sm">{subname}</MenuItem>
+                    <MenuItem className="text-sm">
+                      {subname.toLowerCase()}
+                    </MenuItem>
                   </Link>
                 ))}
               </SubMenu>

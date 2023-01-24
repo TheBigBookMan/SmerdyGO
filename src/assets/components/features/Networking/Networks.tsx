@@ -1,3 +1,5 @@
+//* People Details (Networking)-- important peoples info for stuff i need
+
 const Networks = () => {
   return (
     <div>
