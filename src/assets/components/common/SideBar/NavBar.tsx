@@ -1,5 +1,6 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { hardcodeMenu } from "../../../utils/hardcodemenu";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -9,11 +10,15 @@ const NavBar = () => {
           <>
             {/* <MenuItem className="bg-green-100">{item.name}</MenuItem> */}
             {!item.sub ? (
-              <MenuItem className="text-sm  ">{item.name}</MenuItem>
+              <Link to={`/${item.name.toLowerCase()}`}>
+                <MenuItem className="text-sm">{item.name}</MenuItem>
+              </Link>
             ) : (
-              <SubMenu className="text-sm " label={item.name}>
+              <SubMenu className="text-sm" label={item.name}>
                 {item.subNames.map((subname) => (
-                  <MenuItem className="text-sm  ">{subname}</MenuItem>
+                  <Link to={`/${subname.toLowerCase()}`}>
+                    <MenuItem className="text-sm">{subname}</MenuItem>
+                  </Link>
                 ))}
               </SubMenu>
             )}
