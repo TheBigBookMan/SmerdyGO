@@ -32,32 +32,65 @@ import Login from "./assets/pages/Login";
 import Signup from "./assets/pages/Signup";
 import { Routes, Route } from "react-router-dom";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:3001/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const user = JSON.parse(localStorage.getItem("user") as string);
+  if (user === null) {
+    return;
+  }
+
+  const { token } = user;
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
   //? temporary isloggedin variable
   let isLoggedIn = true;
 
   return (
-    <ProSidebarProvider>
-      <div className="font-mono w-screen h-screen+">
-        <>
-          {isLoggedIn ? (
-            <div className="flex">
-              <SideBar />
-              <div className="flex flex-col w-full">
-                <Header />
-                <Pages />
+    <ApolloProvider client={client}>
+      <ProSidebarProvider>
+        <div className="font-mono w-screen h-screen+">
+          <>
+            {isLoggedIn ? (
+              <div className="flex">
+                <SideBar />
+                <div className="flex flex-col w-full">
+                  <Header />
+                  <Pages />
+                </div>
               </div>
-            </div>
-          ) : (
-            <Routes>
-              <Route index path="/" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-            </Routes>
-          )}
-        </>
-      </div>
-    </ProSidebarProvider>
+            ) : (
+              <Routes>
+                <Route index path="/" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+              </Routes>
+            )}
+          </>
+        </div>
+      </ProSidebarProvider>
+    </ApolloProvider>
   );
 }
 

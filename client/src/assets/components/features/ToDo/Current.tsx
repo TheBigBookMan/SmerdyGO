@@ -73,7 +73,7 @@ const Current = () => {
             </div>
           </div>
           <div className=" h-full w-3/6">
-            <h1 className="font-bold">congrats on completing!</h1>
+            <h1 className="font-bold">todos</h1>
           </div>
         </div>
       </div>
