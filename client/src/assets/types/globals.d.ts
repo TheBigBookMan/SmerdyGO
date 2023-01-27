@@ -8,4 +8,9 @@ declare global {
     email: string;
     password: string;
   }
+
+  interface ToDo {
+    title: string;
+    description: string;
+  }
 }

@@ -1,11 +1,6 @@
 import { timeframes } from "../../../utils/todocode";
 import { ChangeEvent, useState } from "react";
 
-interface ToDo {
-  title: string;
-  description: string;
-}
-
 const Current = () => {
   const [todoTimeframe, setTodoTimeframe] = useState<string>("daily");
   const [enterTodo, setEnterTodo] = useState<ToDo>({
@@ -39,9 +34,9 @@ const Current = () => {
             </li>
           ))}
         </ul>
-        <div className="h-full w-full border-2 border-gray-100 rounded-lg flex">
-          <div className="border-2 h-full w-3/6 flex flex-col">
-            <div className="flex flex-col border-b h-2/6">
+        <div className="h-full w-full border-2 rounded-lg flex">
+          <div className=" h-full w-3/6 flex flex-col">
+            <div className="flex flex-col border-b h-2/6 p-1">
               <h1 className="font-bold">description</h1>
               <p className="text-sm overflow-y-scroll">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
@@ -77,7 +72,7 @@ const Current = () => {
               </form>
             </div>
           </div>
-          <div className="border-2 h-full w-3/6">
+          <div className=" h-full w-3/6">
             <h1 className="font-bold">congrats on completing!</h1>
           </div>
         </div>
