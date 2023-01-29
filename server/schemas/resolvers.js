@@ -73,6 +73,12 @@ const resolvers = {
         return "Could not login, please try again.";
       }
     },
+    logout: async (parent, args, { res, user }) => {
+      if (!user) {
+        return false;
+      }
+      return true;
+    },
   },
 };
 
