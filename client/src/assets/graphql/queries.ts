@@ -13,6 +13,17 @@ export const SIGNUP = `
   }
 `;
 
-export const LOGIN = ``;
+export const LOGIN = `
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        id
+        email
+        password
+      }
+    }
+  }
+`;
 
 export const LOGOUT = ``;

@@ -54,6 +54,25 @@ const resolvers = {
       const token = signToken(user);
       return { user, token };
     },
+
+    login: async (parent, { email, password }, { res }) => {
+      const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+      if (!user) {
+        return "Login error, please try again.";
+      }
+
+      const hashedPassword = user.password;
+      if (bcrypt.compareSync(password, hashedPassword) === true) {
+        const token = signToken(user);
+        return { user, token };
+      } else {
+        return "Could not login, please try again.";
+      }
+    },
   },
 };
 
