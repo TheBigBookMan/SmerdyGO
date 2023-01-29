@@ -34,7 +34,27 @@ const resolvers = {
   }),
 
   Query: {},
-  Mutation: {},
+  Mutation: {
+    addUser: async (parent, { email, password }, { res }) => {
+      const findUser = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+
+      if (findUser) {
+        return "User already exists";
+      }
+      const saltRounds = await bcrypt.genSalt(10);
+      password = await bcrypt.hash(password, saltRounds);
+
+      const user = await prisma.user.create({
+        data: { email, password },
+      });
+      const token = signToken(user);
+      return { user, token };
+    },
+  },
 };
 
 module.exports = resolvers;
