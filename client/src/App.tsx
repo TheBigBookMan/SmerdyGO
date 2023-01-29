@@ -39,6 +39,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { Provider as UserProvider } from "./assets/context/UserContext";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql",
@@ -70,26 +71,28 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <ProSidebarProvider>
-        <div className="font-mono w-screen h-screen+">
-          <>
-            {isLoggedIn ? (
-              <div className="flex">
-                <SideBar />
-                <div className="flex flex-col w-full">
-                  <Header />
-                  <Pages />
+      <UserProvider>
+        <ProSidebarProvider>
+          <div className="font-mono w-screen h-screen+">
+            <>
+              {isLoggedIn ? (
+                <div className="flex">
+                  <SideBar />
+                  <div className="flex flex-col w-full">
+                    <Header />
+                    <Pages />
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <Routes>
-                <Route index path="/" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-              </Routes>
-            )}
-          </>
-        </div>
-      </ProSidebarProvider>
+              ) : (
+                <Routes>
+                  <Route index path="/" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} />
+                </Routes>
+              )}
+            </>
+          </div>
+        </ProSidebarProvider>
+      </UserProvider>
     </ApolloProvider>
   );
 }

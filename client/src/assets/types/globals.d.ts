@@ -13,4 +13,8 @@ declare global {
     title: string;
     description: string;
   }
+
+  interface Prototypes {
+    children: React.ReactNode;
+  }
 }
