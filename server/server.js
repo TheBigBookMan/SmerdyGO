@@ -19,12 +19,11 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
-//TODO add context back into parameters when created
-const startApolloServer = async (typeDefs, resolvers) => {
+const startApolloServer = async (typeDefs, resolvers, context) => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    // context
+    context,
   });
 
   await server.start();
@@ -37,5 +36,4 @@ const startApolloServer = async (typeDefs, resolvers) => {
   });
 };
 
-//TODO add in context when created
-startApolloServer(typeDefs, resolvers);
+startApolloServer(typeDefs, resolvers, authMiddleware);
