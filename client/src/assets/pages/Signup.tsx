@@ -1,22 +1,25 @@
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowLeftShort } from "react-icons/bs";
+import UseUserContext from "../context/UserContext";
 
 const Signup = () => {
   const [formDetails, setFormDetails] = useState<UserForm>({
     email: "",
     password: "",
   });
+  const { signUpUser, loading } = UseUserContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
   };
 
   //!!! UPDATE ANY
-  const submitLogin = (e: any) => {
-    e.preventDefault();
-    console.log(formDetails);
+  const submitLogin = () => {
+    // e.preventDefault();
+    signUpUser({ ...formDetails });
   };
+
   return (
     <div className="flex flex-col gap-20 justify-center items-center h-screen bg-gradient-to-br from-amber-100 to-red-100">
       <Link to="/">
@@ -42,7 +45,7 @@ const Signup = () => {
         />
         <div className="flex gap-10">
           <button
-            onClick={(e) => submitLogin(e)}
+            onClick={(e) => submitLogin()}
             className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-emerald-200 to-green-200 p-4 rounded-xl w-[120px] h-[50px] "
           >
             Signup

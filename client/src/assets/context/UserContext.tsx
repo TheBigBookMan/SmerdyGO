@@ -37,7 +37,9 @@ export const Provider = ({ children }: Prototypes) => {
 
   // ? If the logindata is changed (someone logs in) then the user will be logged in
   useEffect(() => {
-    authenticateUser(loginData.login);
+    if (loginData) {
+      authenticateUser(loginData.login);
+    }
   }, [loginData]);
 
   // ? Function that sets the user info as the logged in user

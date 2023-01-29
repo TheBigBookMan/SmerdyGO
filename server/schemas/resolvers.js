@@ -61,16 +61,16 @@ const resolvers = {
           email,
         },
       });
-      if (!user) {
-        return "Login error, please try again.";
-      }
+      // if (!user) {
+      //   return "Login error, please try again.";
+      // }
 
       const hashedPassword = user.password;
       if (bcrypt.compareSync(password, hashedPassword) === true) {
         const token = signToken(user);
         return { user, token };
       } else {
-        return "Could not login, please try again.";
+        throw Error("Could not login, please try again.");
       }
     },
     logout: async (parent, args, { res, user }) => {

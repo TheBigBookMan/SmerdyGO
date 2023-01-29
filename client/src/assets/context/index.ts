@@ -6,7 +6,7 @@ const createCtx = <T extends {}>() => {
   const useCtx = () => {
     const value = useContext(ctx);
     if (value === null) throw new Error("Context can't be null");
-    return null;
+    return value;
   };
   return [useCtx, ctx.Provider] as const;
 };

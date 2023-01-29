@@ -67,7 +67,7 @@ const client = new ApolloClient({
 
 function App() {
   //? temporary isloggedin variable
-  let isLoggedIn = true;
+  let isLoggedIn = false;
 
   return (
     <ApolloProvider client={client}>
