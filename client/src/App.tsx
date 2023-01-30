@@ -25,12 +25,7 @@
 
 //!!!!! can literally get API for most things and just get the data in here once "connected/authorized" and then store it in database and then can just update end of everyday or something
 
-import Header from "./assets/components/common/Header/Header";
-import SideBar from "./assets/components/common/SideBar/SideBar";
-import Pages from "./assets/pages/Pages";
-import Login from "./assets/pages/Login";
-import Signup from "./assets/pages/Signup";
-import { Routes, Route } from "react-router-dom";
+import OpenScreen from "./assets/pages/OpenScreen";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import {
   ApolloClient,
@@ -66,31 +61,11 @@ const client = new ApolloClient({
 });
 
 function App() {
-  //? temporary isloggedin variable
-  let isLoggedIn = false;
-
   return (
     <ApolloProvider client={client}>
       <UserProvider>
         <ProSidebarProvider>
-          <div className="font-mono w-screen h-screen+">
-            <>
-              {isLoggedIn ? (
-                <div className="flex">
-                  <SideBar />
-                  <div className="flex flex-col w-full">
-                    <Header />
-                    <Pages />
-                  </div>
-                </div>
-              ) : (
-                <Routes>
-                  <Route index path="/" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                </Routes>
-              )}
-            </>
-          </div>
+          <OpenScreen />
         </ProSidebarProvider>
       </UserProvider>
     </ApolloProvider>

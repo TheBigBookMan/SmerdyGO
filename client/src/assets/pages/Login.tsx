@@ -1,7 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import UseUserContext from "../context/UserContext";
 
 const Login = () => {
+  const { loginUser } = UseUserContext();
+
   const [formDetails, setFormDetails] = useState<UserForm>({
     email: "",
     password: "",
@@ -14,7 +17,7 @@ const Login = () => {
   //!!! UPDATE ANY
   const submitLogin = (e: any) => {
     e.preventDefault();
-    console.log(formDetails);
+    loginUser({ ...formDetails });
   };
 
   //TODO NEED TO UPDATE THE LINK FROM LOGIN AND SIGNUP TO BE NAV DIRECT ONCE MUTATIONS ARE MADE CORRECTLY
