@@ -19,4 +19,16 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   password String
+  todos ToDo[]
+}
+
+model ToDo {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  isCompleted Boolean @default(false)
+  timeframe String
+  author User @relation(fields: [authorId], references: [id])
+  authorId String @db.ObjectId
+
 }
