@@ -79,6 +79,23 @@ const resolvers = {
       }
       return true;
     },
+    addTodo: async (parent, { title, description, timeframe }, { user }) => {
+      // ? Adds a todo item with the author id
+      const { id } = user;
+      const addedTodo = await prisma.toDo.create({
+        data: {
+          title,
+          description,
+          timeframe,
+          author: {
+            connect: {
+              id,
+            },
+          },
+        },
+      });
+      return addedTodo;
+    },
   },
 };
 

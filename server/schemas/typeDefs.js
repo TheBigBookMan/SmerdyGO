@@ -7,7 +7,7 @@ const typeDefs = gql`
     id: ID
     email: String
     password: String
-    todos: [ToDo]
+    todos: [String]
   }
 
   type ToDo {

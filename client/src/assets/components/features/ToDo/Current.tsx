@@ -158,6 +158,8 @@ const hardcode = [
 
 //TODO add in tick for the complete button
 
+//TODO to get the list of todo items in relation to the logged in user will need to do a reolsver that is a findMany with a selection of the usersId---- this instead of using userId to then select all ids in their model
+
 const Current = () => {
   const [todoTimeframe, setTodoTimeframe] = useState<string>("daily");
   const [enterTodo, setEnterTodo] = useState<ToDo>({
