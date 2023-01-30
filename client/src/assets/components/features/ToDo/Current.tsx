@@ -1,5 +1,162 @@
 import { timeframes } from "../../../utils/todocode";
 import { ChangeEvent, useState } from "react";
+import { TiTick } from "react-icons/ti";
+
+const hardcode = [
+  {
+    title: "Go gym ",
+    description: "Need to train back and bis",
+    isCompleted: false,
+  },
+  {
+    title: "Python",
+    description:
+      "Do the pytho ncourse and then try and do the automation course tha ti want to do as i really enjoy doing it and then maybe look at data dsicnende and then look at the more jobs etc",
+    isCompleted: true,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Compsi",
+    description: "NHarvard uni comp sci course",
+    isCompleted: false,
+  },
+  {
+    title: "Cook dinner",
+    description: "chicke and veg",
+    isCompleted: true,
+  },
+];
+
+//TODO add in tick for the complete button
 
 const Current = () => {
   const [todoTimeframe, setTodoTimeframe] = useState<string>("daily");
@@ -19,23 +176,25 @@ const Current = () => {
 
   return (
     <div className="w-full h-3/6">
-      <h1 className="flex justify-center">todo list</h1>
       <div className="flex flex-col h-full w-full">
-        <ul className="flex justify-end">
-          {timeframes.map((time) => (
-            <li
-              onClick={() => setTodoTimeframe(time)}
-              value={time}
-              className={`border-2 border-gray-100 p-1 rounded-t-lg cursor-pointer hover:bg-emerald-200 transition-all ${
-                todoTimeframe === time && "bg-emerald-200"
-              }`}
-            >
-              {time}
-            </li>
-          ))}
-        </ul>
+        <div className="flex justify-end gap-8 items-center">
+          <h1 className="flex justify-center">todo list</h1>
+          <ul className="flex justify-end">
+            {timeframes.map((time) => (
+              <li
+                onClick={() => setTodoTimeframe(time)}
+                value={time}
+                className={`border-2 border-gray-100 p-1 rounded-t-lg cursor-pointer hover:bg-emerald-200 transition-all ${
+                  todoTimeframe === time && "bg-emerald-200"
+                }`}
+              >
+                {time}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="h-full w-full border-2 rounded-lg flex">
-          <div className=" h-full w-3/6 flex flex-col">
+          <div className=" h-full w-2/6 flex flex-col">
             <div className="flex flex-col border-b h-2/6 p-1">
               <h1 className="font-bold">description</h1>
               <p className="text-sm overflow-y-scroll">
@@ -61,7 +220,7 @@ const Current = () => {
                   placeholder="description"
                   value={enterTodo.description}
                   className="pl-1 border-2 rounded-lg bg-emerald-100"
-                  rows={5}
+                  rows={3}
                 />
                 <button
                   onClick={onSubmit}
@@ -72,8 +231,25 @@ const Current = () => {
               </form>
             </div>
           </div>
-          <div className=" h-full w-3/6">
+          <div className=" h-full w-4/6 pb-6">
             <h1 className="font-bold">todos</h1>
+            <ul className="flex flex-col w-full h-full max-h-[280px] flex-wrap gap-4  pl-6 overflow-x-auto">
+              {hardcode.map((todo) => (
+                <>
+                  {todo.isCompleted === false && (
+                    <li
+                      key={todo.title}
+                      className="flex gap-2 justify-between w-[220px] max-h-[40px] overflow-y-auto items-center"
+                    >
+                      <h1 className="font-bold cursor-pointer hover:text-emerald-500">
+                        {todo.title}
+                      </h1>
+                      <TiTick className="text-2xl text-emerald-400 hover:border-2 hover:bg-gray-100 hover:rounded-lg hover:shadow cursor-pointer" />
+                    </li>
+                  )}
+                </>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
