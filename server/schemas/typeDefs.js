@@ -15,6 +15,8 @@ const typeDefs = gql`
     title: String
     description: String
     isCompleted: Boolean
+    dateAdded: DateTime
+    dateCompleted: String
     timeframe: String
     author: User
     authorId: ID
@@ -36,7 +38,7 @@ const typeDefs = gql`
     addUser(email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     logout: Boolean
-    addTodo(title: String!, description: String): ToDo
+    addTodo(title: String!, description: String, timeframe: String!): User
     completeTodo(todoId: ID!): ToDo
   }
 `;
