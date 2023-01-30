@@ -8,7 +8,6 @@ import { Routes, Route } from "react-router-dom";
 
 const OpenScreen = () => {
   const { isLoggedIn } = UseUserContext();
-  console.log(isLoggedIn);
 
   return (
     <div className="font-mono w-screen h-screen+">

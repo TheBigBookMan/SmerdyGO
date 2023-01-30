@@ -15,8 +15,8 @@ const Signup = () => {
   };
 
   //!!! UPDATE ANY
-  const submitLogin = () => {
-    // e.preventDefault();
+  const submitLogin = (e: any) => {
+    e.preventDefault();
     signUpUser({ ...formDetails });
   };
 
@@ -45,7 +45,7 @@ const Signup = () => {
         />
         <div className="flex gap-10">
           <button
-            onClick={(e) => submitLogin()}
+            onClick={(e) => submitLogin(e)}
             className="flex justify-center items-center font-bold text-xl bg-gradient-to-br from-emerald-200 to-green-200 p-4 rounded-xl w-[120px] h-[50px] "
           >
             Signup
