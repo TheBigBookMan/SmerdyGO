@@ -80,9 +80,7 @@ const resolvers = {
       return true;
     },
     addTodo: async (parent, { title, description, timeframe }, { user }) => {
-      // ? Adds a todo item with the author id
       const { id } = user;
-
       const updatedUser = await prisma.user.update({
         where: {
           id,

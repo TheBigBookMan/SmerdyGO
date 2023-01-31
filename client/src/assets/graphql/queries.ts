@@ -31,3 +31,19 @@ export const LOGOUT = gql`
     logout
   }
 `;
+
+export const ADDTODO = gql`
+  mutation AddToDo($title: String!, $description: String, $timeframe: String!) {
+    addTodo(title: $title, description: $description, timeframe: $timeframe) {
+      todos {
+        title
+        description
+        isCompleted
+        dateAdded
+        dateCompleted
+        timeframe
+      }
+      id
+    }
+  }
+`;

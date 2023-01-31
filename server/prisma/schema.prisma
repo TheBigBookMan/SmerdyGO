@@ -23,7 +23,7 @@ model User {
 }
 
 type ToDo {
-  // id String @id @default(auto()) @map("_id") @db.ObjectId
+  // id String @map("_id") @db.ObjectId
   title String
   description String?
   isCompleted Boolean @default(false)
