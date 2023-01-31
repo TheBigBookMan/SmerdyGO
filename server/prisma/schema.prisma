@@ -22,15 +22,15 @@ model User {
   todos ToDo[]
 }
 
-model ToDo {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+type ToDo {
+  // id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String?
   isCompleted Boolean @default(false)
   dateAdded DateTime @default(now())
   dateCompleted String?
   timeframe String
-  author User @relation(fields: [authorId], references: [id])
-  authorId String @db.ObjectId
+  // author User @relation(fields: [authorId], references: [id])
+  // authorId String @db.ObjectId
 
 }

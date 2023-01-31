@@ -7,19 +7,16 @@ const typeDefs = gql`
     id: ID
     email: String
     password: String
-    todos: [String]
+    todos: [ToDo]
   }
 
   type ToDo {
-    id: ID
     title: String
     description: String
     isCompleted: Boolean
     dateAdded: DateTime
     dateCompleted: String
     timeframe: String
-    author: User
-    authorId: ID
   }
 
   type Auth {

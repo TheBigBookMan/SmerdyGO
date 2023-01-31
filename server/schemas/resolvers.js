@@ -82,19 +82,16 @@ const resolvers = {
     addTodo: async (parent, { title, description, timeframe }, { user }) => {
       // ? Adds a todo item with the author id
       const { id } = user;
-      const addedTodo = await prisma.toDo.create({
+
+      const updatedUser = await prisma.user.update({
+        where: {
+          id,
+        },
         data: {
-          title,
-          description,
-          timeframe,
-          author: {
-            connect: {
-              id,
-            },
-          },
+          todos: { push: { title, description, timeframe } },
         },
       });
-      return addedTodo;
+      return updatedUser;
     },
   },
 };
