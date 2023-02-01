@@ -16,6 +16,7 @@ import Crypto from "../components/features/Investments/Crypto/Crypto";
 import Stocks from "../components/features/Investments/Stocks/Stocks";
 import Other from "../components/features/Investments/Other/Other";
 import APIs from "../components/features/APIs/API";
+import Stoic from "../components/features/Stoic/Stoic";
 import Widgets from "../components/features/Widgets/Widgets";
 import { Routes, Route } from "react-router-dom";
 
@@ -41,6 +42,7 @@ const Pages = () => {
         <Route path="/stocks" element={<Stocks />} />
         <Route path="/other" element={<Other />} />
         <Route path="/apis" element={<APIs />} />
+        <Route path="/stoic" element={<Stoic />} />
         <Route path="/widgets" element={<Widgets />} />
       </Routes>
     </div>
