@@ -5,6 +5,11 @@ import { ADD_TODO, GET_TODOS } from "../../../graphql/queries";
 import { useMutation, useQuery } from "@apollo/client";
 
 const Current = () => {
+  const [selectTodo, setSelectTodo] = useState<ToDoForm>({
+    title: "",
+    description: "",
+    timeframe: "",
+  });
   const [incompleteTodoList, setIncompleteTodoList] = useState<
     ToDo[] | undefined
   >([]);
@@ -87,12 +92,11 @@ const Current = () => {
           <div className=" h-full w-2/6 flex flex-col">
             <div className="flex flex-col border-b h-2/6 p-1">
               <h1 className="font-bold">
-                description- <span>go gym</span>
+                description-{" "}
+                <span className="text-emerald-500 ">{selectTodo.title}</span>
               </h1>
-              <p className="text-xs overflow-y-scroll">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
-                voluptatem ea repellendus ut voluptatibus sequi! Officia
-                expedita exercitationem eos natus.
+              <p className="text-xs overflow-y-auto">
+                {selectTodo.description}
               </p>
             </div>
             <div className="flex flex-col gap-2 p-1">
@@ -136,7 +140,13 @@ const Current = () => {
                         key={todo.title}
                         className="flex gap-2 justify-between w-[220px] max-h-[40px] overflow-y-auto items-center"
                       >
-                        <h1 className="font-bold cursor-pointer hover:text-emerald-500">
+                        <h1
+                          onClick={() => setSelectTodo({ ...todo })}
+                          className={`font-bold cursor-pointer hover:text-emerald-500 ${
+                            selectTodo.title === todo.title &&
+                            "text-emerald-500"
+                          } `}
+                        >
                           {todo.title}
                         </h1>
                         <TiTick className="text-2xl text-emerald-400 hover:border-2 hover:bg-gray-100 hover:rounded-lg hover:shadow cursor-pointer" />

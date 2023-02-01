@@ -36,7 +36,6 @@ const resolvers = {
   Query: {
     getTodos: async (parent, { completeOrNot }, { user }) => {
       const { id } = user;
-      console.log(completeOrNot);
       const { todos } = await prisma.user.findUnique({
         where: {
           id,
