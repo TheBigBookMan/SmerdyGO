@@ -12,12 +12,14 @@ const Header = () => {
       <Link to="/">
         <BsArrowLeftShort className="text-3xl cursor-pointer border-emerald-200 hover:bg-emerald-200 hover:bg-emerald-200 border-solid border-2 rounded-xl transition-all" />
       </Link>
-      <button
-        onClick={logoutUser}
-        className="text-sm cursor-pointer border-emerald-200 hover:bg-emerald-200 hover:bg-emerald-200 border-solid border-2 rounded-xl transition-all w-[60px] h-[30px]"
-      >
-        logout
-      </button>
+      <Link to="/">
+        <button
+          onClick={logoutUser}
+          className="text-sm cursor-pointer border-emerald-200 hover:bg-emerald-200 hover:bg-emerald-200 border-solid border-2 rounded-xl transition-all w-[60px] h-[30px]"
+        >
+          logout
+        </button>
+      </Link>
     </div>
   );
 };
