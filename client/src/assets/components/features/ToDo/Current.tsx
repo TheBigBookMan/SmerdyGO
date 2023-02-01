@@ -1,6 +1,8 @@
 import { timeframes } from "../../../utils/todocode";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
+import { ADDTODO } from "../../../graphql/queries";
+import { useMutation, useQuery } from "@apollo/client";
 
 const hardcode = [
   {
@@ -166,15 +168,24 @@ const Current = () => {
   const [enterTodo, setEnterTodo] = useState<ToDo>({
     title: "",
     description: "",
+    timeframe: todoTimeframe,
   });
+  const [addToDo, { data: addTodoData, loading }] = useMutation(ADDTODO);
+
+  // TODO useEffect with the addTodoData for any change and then that will reload the useQuery load for all the todo list items
+
+  useEffect(() => {
+    setEnterTodo({ ...enterTodo, timeframe: todoTimeframe });
+  }, [todoTimeframe]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEnterTodo({ ...enterTodo, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     console.log(enterTodo);
+    await addToDo({ variables: { ...enterTodo } });
   };
 
   return (
@@ -185,6 +196,7 @@ const Current = () => {
           <ul className="flex justify-end">
             {timeframes.map((time) => (
               <li
+                key={time}
                 onClick={() => setTodoTimeframe(time)}
                 value={time}
                 className={`border-2 border-gray-100 p-1 rounded-t-lg cursor-pointer hover:bg-emerald-200 transition-all ${

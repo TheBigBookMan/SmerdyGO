@@ -12,6 +12,7 @@ declare global {
   interface ToDo {
     title: string;
     description: string;
+    timeframe: string;
   }
 
   interface Prototypes {

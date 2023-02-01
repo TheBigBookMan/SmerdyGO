@@ -13,6 +13,7 @@ const Completed = () => {
           <ul className="flex justify-end">
             {timeframes.map((time) => (
               <li
+                key={time}
                 onClick={() => setTodoTimeframe(time)}
                 value={time}
                 className={`border-2 border-gray-100 p-1 rounded-t-lg cursor-pointer hover:bg-emerald-200 transition-all ${
