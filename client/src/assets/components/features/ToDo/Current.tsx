@@ -1,178 +1,32 @@
 import { timeframes } from "../../../utils/todocode";
 import { ChangeEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
-import { ADDTODO } from "../../../graphql/queries";
+import { ADD_TODO, GET_INCOMPLETE_TODOS } from "../../../graphql/queries";
 import { useMutation, useQuery } from "@apollo/client";
 
-const hardcode = [
-  {
-    title: "Go gym ",
-    description: "Need to train back and bis",
-    isCompleted: false,
-  },
-  {
-    title: "Python",
-    description:
-      "Do the pytho ncourse and then try and do the automation course tha ti want to do as i really enjoy doing it and then maybe look at data dsicnende and then look at the more jobs etc",
-    isCompleted: true,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Compsi",
-    description: "NHarvard uni comp sci course",
-    isCompleted: false,
-  },
-  {
-    title: "Cook dinner",
-    description: "chicke and veg",
-    isCompleted: true,
-  },
-];
-
-//TODO add in tick for the complete button
-
-//TODO to get the list of todo items in relation to the logged in user will need to do a reolsver that is a findMany with a selection of the usersId---- this instead of using userId to then select all ids in their model
-// https://www.youtube.com/watch?v=b4nxOv91vWI&t=379s
-
 const Current = () => {
+  const [incompleteTodoList, setIncompleteTodoList] = useState<ToDo[]>([]);
   const [todoTimeframe, setTodoTimeframe] = useState<string>("daily");
-  const [enterTodo, setEnterTodo] = useState<ToDo>({
+  const [enterTodo, setEnterTodo] = useState<ToDoForm>({
     title: "",
     description: "",
     timeframe: todoTimeframe,
   });
-  const [addToDo, { data: addTodoData, loading }] = useMutation(ADDTODO);
+  const [addToDo, { data: addTodoData, loading }] = useMutation(ADD_TODO, {
+    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }],
+  });
+  const { data: incompleteTodos, loading: incompleteTodosLoading } =
+    useQuery(GET_INCOMPLETE_TODOS);
 
   // TODO useEffect with the addTodoData for any change and then that will reload the useQuery load for all the todo list items
+
+  useEffect(() => {
+    const listOfIncompleteTodos = incompleteTodos?.getIncompleteTodos;
+    if (listOfIncompleteTodos) {
+      console.log(listOfIncompleteTodos);
+      setIncompleteTodoList([...listOfIncompleteTodos]);
+    }
+  }, [incompleteTodos]);
 
   useEffect(() => {
     setEnterTodo({ ...enterTodo, timeframe: todoTimeframe });
@@ -184,8 +38,8 @@ const Current = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(enterTodo);
     await addToDo({ variables: { ...enterTodo } });
+    setEnterTodo({ ...enterTodo, title: "", description: "" });
   };
 
   return (
@@ -248,23 +102,27 @@ const Current = () => {
           </div>
           <div className=" h-full w-4/6 pb-6">
             <h1 className="font-bold">todos</h1>
-            <ul className="flex flex-col w-full h-full max-h-[280px] flex-wrap gap-4  pl-6 overflow-x-auto">
-              {hardcode.map((todo) => (
-                <>
-                  {todo.isCompleted === false && (
-                    <li
-                      key={todo.title}
-                      className="flex gap-2 justify-between w-[220px] max-h-[40px] overflow-y-auto items-center"
-                    >
-                      <h1 className="font-bold cursor-pointer hover:text-emerald-500">
-                        {todo.title}
-                      </h1>
-                      <TiTick className="text-2xl text-emerald-400 hover:border-2 hover:bg-gray-100 hover:rounded-lg hover:shadow cursor-pointer" />
-                    </li>
-                  )}
-                </>
-              ))}
-            </ul>
+            {incompleteTodosLoading ? (
+              <h1>Loading...</h1>
+            ) : (
+              <ul className="flex flex-col w-full h-full max-h-[280px] flex-wrap gap-4  pl-6 overflow-x-auto">
+                {incompleteTodoList.map((todo) => (
+                  <>
+                    {todo.isCompleted === false && (
+                      <li
+                        key={todo.title}
+                        className="flex gap-2 justify-between w-[220px] max-h-[40px] overflow-y-auto items-center"
+                      >
+                        <h1 className="font-bold cursor-pointer hover:text-emerald-500">
+                          {todo.title}
+                        </h1>
+                        <TiTick className="text-2xl text-emerald-400 hover:border-2 hover:bg-gray-100 hover:rounded-lg hover:shadow cursor-pointer" />
+                      </li>
+                    )}
+                  </>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
