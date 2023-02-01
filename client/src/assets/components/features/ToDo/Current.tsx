@@ -1,7 +1,7 @@
 import { timeframes } from "../../../utils/todocode";
 import { ChangeEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
-import { ADD_TODO, GET_INCOMPLETE_TODOS } from "../../../graphql/queries";
+import { ADD_TODO, GET_TODOS } from "../../../graphql/queries";
 import { useMutation, useQuery } from "@apollo/client";
 
 const Current = () => {
@@ -15,26 +15,27 @@ const Current = () => {
     timeframe: todoTimeframe,
   });
   const [addToDo, { data: addTodoData, loading }] = useMutation(ADD_TODO, {
-    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }],
+    refetchQueries: [{ query: GET_TODOS, variables: { completeOrNot: false } }],
   });
-  const { data: incompleteTodos, loading: incompleteTodosLoading } =
-    useQuery(GET_INCOMPLETE_TODOS);
+  const { data: incompleteTodos, loading: incompleteTodosLoading } = useQuery(
+    GET_TODOS,
+    { variables: { completeOrNot: false } }
+  );
 
-  // TODO use a filter to sort out the incompleteTodos to match up on the timeframe selected and then store that into the state variable based on the timeframe--- will need to figure something out as dont want to have to call query from database everytime user clicks on different timeframe
-
+  // ? Gets the list of todos from database and calls timeframe arranging function
   useEffect(() => {
-    const listOfIncompleteTodos = incompleteTodos?.getIncompleteTodos;
+    const listOfIncompleteTodos = incompleteTodos?.getTodos;
     if (listOfIncompleteTodos) {
-      console.log(listOfIncompleteTodos);
       sortTimeframeLists(listOfIncompleteTodos);
     }
   }, [todoTimeframe, incompleteTodos]);
 
+  //? Changes timeframe based on user
   useEffect(() => {
     setEnterTodo({ ...enterTodo, timeframe: todoTimeframe });
   }, [todoTimeframe]);
 
-  //? Sorting function that gets called everytime to user changes the timeframe state and then this will sort the incompleteTodos state into lists based on their timeframe info and stored back into the incompletetodo list
+  //? Function that sorts the list based on timeframe
   const sortTimeframeLists = (list: ToDo[]) => {
     let sortedList;
     if (todoTimeframe === "daily") {
@@ -110,7 +111,7 @@ const Current = () => {
                   name="description"
                   placeholder="description"
                   value={enterTodo.description}
-                  className="pl-1 border-2 rounded-lg bg-emerald-100"
+                  className="pl-1 border-2 rounded-lg bg-emerald-100 "
                   rows={3}
                 />
                 <button

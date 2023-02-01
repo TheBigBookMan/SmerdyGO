@@ -49,8 +49,8 @@ export const ADD_TODO = gql`
 `;
 
 export const GET_TODOS = gql`
-  query GetAllTodos {
-    getTodos {
+  query GetTodos($completeOrNot: Boolean!) {
+    getTodos(completeOrNot: $completeOrNot) {
       title
       description
       isCompleted
