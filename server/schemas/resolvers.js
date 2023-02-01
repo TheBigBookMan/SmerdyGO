@@ -33,7 +33,24 @@ const resolvers = {
     },
   }),
 
-  Query: {},
+  Query: {
+    getIncompleteTodos: async (parent, args, { user }) => {
+      const { id } = user;
+      const { todos } = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      const incompleteTodos = todos.map((todo) => {
+        if (todo.isCompleted === false) {
+          return todo;
+        }
+      });
+
+      return incompleteTodos;
+    },
+  },
   Mutation: {
     addUser: async (parent, { email, password }, { res }) => {
       const findUser = await prisma.user.findUnique({

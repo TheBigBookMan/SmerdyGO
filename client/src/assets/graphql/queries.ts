@@ -32,7 +32,7 @@ export const LOGOUT = gql`
   }
 `;
 
-export const ADDTODO = gql`
+export const ADD_TODO = gql`
   mutation AddToDo($title: String!, $description: String, $timeframe: String!) {
     addTodo(title: $title, description: $description, timeframe: $timeframe) {
       todos {
@@ -44,6 +44,19 @@ export const ADDTODO = gql`
         timeframe
       }
       id
+    }
+  }
+`;
+
+export const GET_INCOMPLETE_TODOS = gql`
+  query GetAllTodos {
+    getIncompleteTodos {
+      title
+      description
+      isCompleted
+      dateAdded
+      dateCompleted
+      timeframe
     }
   }
 `;
