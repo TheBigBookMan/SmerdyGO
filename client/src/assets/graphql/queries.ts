@@ -48,9 +48,9 @@ export const ADD_TODO = gql`
   }
 `;
 
-export const GET_INCOMPLETE_TODOS = gql`
+export const GET_TODOS = gql`
   query GetAllTodos {
-    getIncompleteTodos {
+    getTodos {
       title
       description
       isCompleted

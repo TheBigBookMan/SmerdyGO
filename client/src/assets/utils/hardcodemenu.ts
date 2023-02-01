@@ -68,6 +68,13 @@ export const hardcodeMenu = [
       "This is a spot to add in APIs that you can use for your own data tracking to make data input automatic.",
   },
   {
+    name: "Stoic",
+    sub: false,
+    subNames: [""],
+    description:
+      "A daily page out of Ryan Holidays- The Daily Stoic as a motivator to keep going.",
+  },
+  {
     name: "Widgets",
     sub: false,
     subNames: [""],

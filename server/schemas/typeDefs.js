@@ -28,7 +28,7 @@ const typeDefs = gql`
     me: User
     singleUser(id: ID!): User
     getTodo(todoId: ID!): ToDo
-    getIncompleteTodos: [ToDo]
+    getTodos(completeOrNot: Boolean!): [ToDo]
   }
 
   type Mutation {

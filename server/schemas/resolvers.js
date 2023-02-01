@@ -34,21 +34,22 @@ const resolvers = {
   }),
 
   Query: {
-    getIncompleteTodos: async (parent, args, { user }) => {
+    getTodos: async (parent, { completeOrNot }, { user }) => {
       const { id } = user;
+      console.log(completeOrNot);
       const { todos } = await prisma.user.findUnique({
         where: {
           id,
         },
       });
 
-      const incompleteTodos = todos.map((todo) => {
-        if (todo.isCompleted === false) {
+      const listTodos = todos.filter((todo) => {
+        if (todo.isCompleted === completeOrNot) {
           return todo;
         }
       });
 
-      return incompleteTodos;
+      return listTodos;
     },
   },
   Mutation: {
