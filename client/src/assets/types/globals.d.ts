@@ -9,9 +9,18 @@ declare global {
     password: string;
   }
 
+  interface ToDoForm {
+    title: string;
+    description: string;
+    timeframe: string;
+  }
+
   interface ToDo {
     title: string;
     description: string;
+    isCompleted: boolean;
+    dateAdded: string;
+    dateCompleted: string | null;
     timeframe: string;
   }
 
