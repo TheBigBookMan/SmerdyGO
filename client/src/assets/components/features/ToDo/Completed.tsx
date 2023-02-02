@@ -42,7 +42,7 @@ const Completed = () => {
   //TODO add in a unit of measurement for the goal as it will be important for things that may be quatity -- example-- save $300 of my goal of $3000 for the month
 
   return (
-    <div className="w-full h-3/6">
+    <div className="w-full h-3/6 pb-1">
       <div className="flex flex-col h-full w-full">
         <div className="flex justify-end gap-8 items-center">
           <h1 className="flex justify-center">completed todos</h1>
@@ -62,8 +62,8 @@ const Completed = () => {
             ))}
           </ul>
         </div>
-        <div className="h-full w-full border-2 border-gray-100 rounded-lg flex">
-          <div className="border-2 h-full w-3/6 p-1">
+        <div className="h-full w-full border-2 rounded-lg flex">
+          <div className="h-full w-3/6 p-1">
             <h1 className="font-bold">
               description-{" "}
               <span className="text-emerald-500">{selectTodo.title}</span>
@@ -107,7 +107,7 @@ const Completed = () => {
               </button>
             </div>
           </div>
-          <div className="border-2 h-full w-3/6">
+          <div className=" h-full w-3/6">
             <h1 className="font-bold">congrats on completing!</h1>
             {!completedTodoList ? (
               <h1>Loading...</h1>

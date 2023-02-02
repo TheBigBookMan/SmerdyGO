@@ -11,12 +11,15 @@ const typeDefs = gql`
   }
 
   type ToDo {
+    id: ID
     title: String
     description: String
     isCompleted: Boolean
     dateAdded: DateTime
     dateCompleted: String
     timeframe: String
+    author: User
+    authorId: String
   }
 
   type Auth {

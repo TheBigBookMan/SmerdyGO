@@ -40,6 +40,9 @@ const resolvers = {
         where: {
           id,
         },
+        include: {
+          todos: true,
+        },
       });
 
       const listTodos = todos.filter((todo) => {
@@ -98,15 +101,28 @@ const resolvers = {
     },
     addTodo: async (parent, { title, description, timeframe }, { user }) => {
       const { id } = user;
-      const updatedUser = await prisma.user.update({
-        where: {
-          id,
-        },
+      const createdTodo = await prisma.toDo.create({
         data: {
-          todos: { push: { title, description, timeframe } },
+          title,
+          description,
+          timeframe,
+          authorId: id,
         },
       });
-      return updatedUser;
+
+      //? maybe later decide i want the user to have an array of todo ids???
+      // const updatedUser = await prisma.user.update({
+      //   where: {
+      //     id,
+      //   },
+      //   data: {
+      //     todos: { push: { title, description, timeframe } },
+      //   },
+      // });
+      return createdTodo;
+    },
+    completeTodo: async (parent, { todoId }, { user }) => {
+      const { id } = user;
     },
   },
 };
