@@ -58,10 +58,6 @@ const Current = () => {
     setEnterTodo({ ...enterTodo, title: "", description: "" });
   };
 
-  //TODO
-  //TODOneed to create a update mutation to change from incomplete to completed and this will require a function in the resolver to get the current date and then store that as a string in the database
-  //TODO
-
   //TODO can think of another button that does something and ut it next to the enter todo button
 
   return (

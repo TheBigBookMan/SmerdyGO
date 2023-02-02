@@ -1,7 +1,7 @@
 import { timeframes } from "../../../utils/todocode";
 import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_TODOS } from "../../../graphql/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_TODOS, DELETE_TODO } from "../../../graphql/queries";
 import { sortTimeframeLists } from "../../../hooks/sortTimeframeLists";
 import { BiRefresh } from "react-icons/bi";
 
@@ -31,6 +31,7 @@ const Completed = () => {
     loading: completeTodosLoading,
     refetch,
   } = useQuery(GET_TODOS, { variables: { completeOrNot: true } });
+  const [deleteTodo] = useMutation(DELETE_TODO);
 
   useEffect(() => {
     const listCompleteTodos = completeTodos?.getTodos;
@@ -40,10 +41,23 @@ const Completed = () => {
     }
   }, [completeTodos, todoTimeframe]);
 
+  const updateDelete = async () => {
+    await deleteTodo({ variables: { todoId: selectTodo.id } });
+    refetch({ completeOrNot: true });
+    setSelectTodo({
+      id: "",
+      title: "",
+      description: "",
+      isCompleted: true,
+      dateAdded: "",
+      dateCompleted: "",
+      timeframe: "",
+    });
+  };
+
   //TODO could have a selection that selects a goal and then you can press a button to then add that todo to that goal--- example--- your goal is to gym 5 times a week, and once you click the complete then you can select to add that gym completion to the goal of gym 5 times a week
 
   //TODO add in a unit of measurement for the goal as it will be important for things that may be quatity -- example-- save $300 of my goal of $3000 for the month
-
   return (
     <div className="w-full h-3/6 pb-1">
       <div className="flex flex-col h-full w-full">
@@ -110,7 +124,10 @@ const Completed = () => {
                   update goal
                 </button>
               </form>
-              <button className=" cursor-pointer border-2 rounded-xl w-[140px] h-[40px] hover:bg-red-300 bg-red-200 hover:border-red-200 transition-all">
+              <button
+                onClick={updateDelete}
+                className=" cursor-pointer border-2 rounded-xl w-[140px] h-[40px] hover:bg-red-300 bg-red-200 hover:border-red-200 transition-all"
+              >
                 delete todo
               </button>
             </div>

@@ -40,6 +40,7 @@ const typeDefs = gql`
     logout: Boolean
     addTodo(title: String!, description: String, timeframe: String!): User
     completeTodo(todoId: ID!): ToDo
+    deleteTodo(todoId: ID!): User
   }
 `;
 

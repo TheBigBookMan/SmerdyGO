@@ -123,15 +123,30 @@ const resolvers = {
     },
     completeTodo: async (parent, { todoId }, { user }) => {
       const { id } = user;
+
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      let mm = today.getMonth() + 1; // Months start at 0!
+      let dd = today.getDate();
+      const formattedToday = dd + "/" + mm + "/" + yyyy;
+
       const findTodo = await prisma.toDo.update({
         where: {
           id: todoId,
         },
         data: {
           isCompleted: true,
+          dateCompleted: formattedToday,
         },
       });
       return findTodo;
+    },
+    deleteTodo: async (parent, { todoId }, { user }) => {
+      await prisma.toDo.delete({
+        where: {
+          id: todoId,
+        },
+      });
     },
   },
 };
