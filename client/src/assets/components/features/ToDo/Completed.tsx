@@ -39,6 +39,8 @@ const Completed = () => {
 
   //TODO could have a selection that selects a goal and then you can press a button to then add that todo to that goal--- example--- your goal is to gym 5 times a week, and once you click the complete then you can select to add that gym completion to the goal of gym 5 times a week
 
+  //TODO add in a unit of measurement for the goal as it will be important for things that may be quatity -- example-- save $300 of my goal of $3000 for the month
+
   return (
     <div className="w-full h-3/6">
       <div className="flex flex-col h-full w-full">
@@ -66,7 +68,7 @@ const Completed = () => {
               description-{" "}
               <span className="text-emerald-500">{selectTodo.title}</span>
             </h1>
-            <p className="text-xs overflow-y-auto h-[100px]">
+            <p className="text-xs overflow-y-auto h-[60px]">
               {selectTodo.description}
             </p>
             <h1 className="font-bold">
@@ -79,13 +81,23 @@ const Completed = () => {
                 {selectTodo.dateCompleted}
               </span>
             </h1>
-            <div className="flex flex-col gap-4 ">
-              <form className="mt-2 flex gap-4 items-center">
-                <select className="h-[30px] bg-gray-100 rounded-xl pl-1">
-                  {hardcodegoals.map((goal) => (
-                    <option value={goal}>{goal}</option>
-                  ))}
-                </select>
+            <div className="flex flex-col gap-1 border-t">
+              <h1 className="font-bold">
+                update your goal by adding on the extra unit
+              </h1>
+              <form className="flex flex-col gap-1">
+                <div className="flex gap-4 items-center">
+                  <select className="h-[30px] bg-gray-100 rounded-xl pl-1">
+                    {hardcodegoals.map((goal) => (
+                      <option value={goal}>{goal}</option>
+                    ))}
+                  </select>
+                  <input
+                    className="bg-gray-100 rounded-xl pl-2 h-[30px]"
+                    placeholder="unit of measure"
+                  />
+                  <p className="text-emerald-500">completed 3/5</p>
+                </div>
                 <button className=" cursor-pointer border-2 rounded-xl w-[110px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all">
                   update goal
                 </button>
