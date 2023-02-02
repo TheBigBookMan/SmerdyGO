@@ -3,6 +3,7 @@ import { ChangeEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 import { ADD_TODO, GET_TODOS } from "../../../graphql/queries";
 import { useMutation, useQuery } from "@apollo/client";
+import { sortTimeframeLists } from "../../../hooks/sortTimeframeLists";
 
 const Current = () => {
   const [selectTodo, setSelectTodo] = useState<ToDoForm>({
@@ -31,7 +32,11 @@ const Current = () => {
   useEffect(() => {
     const listOfIncompleteTodos = incompleteTodos?.getTodos;
     if (listOfIncompleteTodos) {
-      sortTimeframeLists(listOfIncompleteTodos);
+      const finalList = sortTimeframeLists(
+        listOfIncompleteTodos,
+        todoTimeframe
+      );
+      setIncompleteTodoList(finalList);
     }
   }, [todoTimeframe, incompleteTodos]);
 
@@ -39,24 +44,6 @@ const Current = () => {
   useEffect(() => {
     setEnterTodo({ ...enterTodo, timeframe: todoTimeframe });
   }, [todoTimeframe]);
-
-  //? Function that sorts the list based on timeframe
-  const sortTimeframeLists = (list: ToDo[]) => {
-    let sortedList;
-    if (todoTimeframe === "daily") {
-      sortedList = list.filter((todo) => todo.timeframe === "daily");
-    } else if (todoTimeframe === "weekly") {
-      sortedList = list.filter((todo) => todo.timeframe === "weekly");
-    } else if (todoTimeframe === "monthly") {
-      sortedList = list.filter((todo) => todo.timeframe === "monthly");
-    } else if (todoTimeframe === "yearly") {
-      sortedList = list.filter((todo) => todo.timeframe === "yearly");
-    } else if (todoTimeframe === "life") {
-      sortedList = list.filter((todo) => todo.timeframe === "life");
-    }
-
-    setIncompleteTodoList(sortedList);
-  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEnterTodo({ ...enterTodo, [e.target.name]: e.target.value });
@@ -67,6 +54,12 @@ const Current = () => {
     await addToDo({ variables: { ...enterTodo } });
     setEnterTodo({ ...enterTodo, title: "", description: "" });
   };
+
+  //TODO
+  //TODOneed to create a update mutation to change from incomplete to completed and this will require a function in the resolver to get the current date and then store that as a string in the database
+  //TODO
+
+  //TODO can think of another button that does something and ut it next to the enter todo button
 
   return (
     <div className="w-full h-3/6">
@@ -128,7 +121,9 @@ const Current = () => {
             </div>
           </div>
           <div className=" h-full w-4/6 pb-6">
-            <h1 className="font-bold">todos</h1>
+            <h1 className="font-bold">
+              todos- click the tick to mark as complete
+            </h1>
             {!incompleteTodoList ? (
               <h1>Loading...</h1>
             ) : (

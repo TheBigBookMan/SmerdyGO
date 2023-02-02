@@ -15,7 +15,7 @@ const Header = () => {
       <Link to="/">
         <button
           onClick={logoutUser}
-          className="text-sm cursor-pointer border-emerald-200 hover:bg-emerald-200 hover:bg-emerald-200 border-solid border-2 rounded-xl transition-all w-[60px] h-[30px]"
+          className="text-sm cursor-pointer border-red-200 hover:bg-red-200 hover:bg-red-200 border-solid border-2 rounded-xl transition-all w-[60px] h-[30px]"
         >
           logout
         </button>
