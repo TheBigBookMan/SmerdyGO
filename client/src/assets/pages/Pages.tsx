@@ -6,6 +6,7 @@ import Calendar from "../components/features/Calendar/Calendar";
 import Networks from "../components/features/Networking/Networks";
 import Gym from "../components/features/Health/Gym/Gym";
 import Nutrition from "../components/features/Health/Nutrition/Nutrition";
+import Cooking from "../components/features/Health/Cooking/Cooking";
 import Running from "../components/features/Health/Running/Running";
 import Code from "../components/features/Skills/Code/Code";
 import Music from "../components/features/Skills/Music/Music";
@@ -32,6 +33,7 @@ const Pages = () => {
         <Route path="/networks" element={<Networks />} />
         <Route path="/gym" element={<Gym />} />
         <Route path="/nutrition" element={<Nutrition />} />
+        <Route path="/cooking" element={<Cooking />} />
         <Route path="/running" element={<Running />} />
         <Route path="/code" element={<Code />} />
         <Route path="/music" element={<Music />} />

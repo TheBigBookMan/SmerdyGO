@@ -35,7 +35,7 @@ export const hardcodeMenu = [
   {
     name: "Health",
     sub: true,
-    subNames: ["Nutrition", "Running", "Gym"],
+    subNames: ["Nutrition", "Running", "Gym", "Cooking"],
     description:
       "A section to keep on track of your fitness, nutrition and weight goals. Tracking with manual inputting or use APIs for automatic updates.",
   },
