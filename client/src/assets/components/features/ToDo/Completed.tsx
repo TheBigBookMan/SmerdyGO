@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_TODOS } from "../../../graphql/queries";
 import { sortTimeframeLists } from "../../../hooks/sortTimeframeLists";
+import { BiRefresh } from "react-icons/bi";
 
 const hardcodegoals = [
   "gym 5 times a week",
@@ -13,6 +14,7 @@ const hardcodegoals = [
 
 const Completed = () => {
   const [selectTodo, setSelectTodo] = useState<ToDo>({
+    id: "",
     title: "",
     description: "",
     isCompleted: true,
@@ -24,10 +26,11 @@ const Completed = () => {
     ToDo[] | undefined
   >([]);
   const [todoTimeframe, setTodoTimeframe] = useState<string>("daily");
-  const { data: completeTodos, loading: completeTodosLoading } = useQuery(
-    GET_TODOS,
-    { variables: { completeOrNot: true } }
-  );
+  const {
+    data: completeTodos,
+    loading: completeTodosLoading,
+    refetch,
+  } = useQuery(GET_TODOS, { variables: { completeOrNot: true } });
 
   useEffect(() => {
     const listCompleteTodos = completeTodos?.getTodos;
@@ -45,8 +48,11 @@ const Completed = () => {
     <div className="w-full h-3/6 pb-1">
       <div className="flex flex-col h-full w-full">
         <div className="flex justify-end gap-8 items-center">
+          <BiRefresh
+            onClick={() => refetch({ completeOrNot: true })}
+            className="text-3xl cursor-pointer border-emerald-200 hover:bg-emerald-200 hover:bg-emerald-200 border-solid border-2 rounded-xl transition-all hover:rotate-180"
+          />
           <h1 className="flex justify-center">completed todos</h1>
-
           <ul className="flex justify-end">
             {timeframes.map((time) => (
               <li
@@ -89,7 +95,9 @@ const Completed = () => {
                 <div className="flex gap-4 items-center">
                   <select className="h-[30px] bg-gray-100 rounded-xl pl-1">
                     {hardcodegoals.map((goal) => (
-                      <option value={goal}>{goal}</option>
+                      <option key={goal} value={goal}>
+                        {goal}
+                      </option>
                     ))}
                   </select>
                   <input
@@ -112,7 +120,7 @@ const Completed = () => {
             {!completedTodoList ? (
               <h1>Loading...</h1>
             ) : (
-              <ul className="flex flex-col w-full h-full max-h-[240px] flex-wrap gap-4  pl-6 overflow-x-auto">
+              <ul className="flex flex-col w-full h-full max-h-[260px] flex-wrap gap-4  pl-6 overflow-x-auto">
                 {completedTodoList.map((todo) => (
                   <>
                     {todo.isCompleted === true && (

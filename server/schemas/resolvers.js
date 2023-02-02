@@ -123,6 +123,15 @@ const resolvers = {
     },
     completeTodo: async (parent, { todoId }, { user }) => {
       const { id } = user;
+      const findTodo = await prisma.toDo.update({
+        where: {
+          id: todoId,
+        },
+        data: {
+          isCompleted: true,
+        },
+      });
+      return findTodo;
     },
   },
 };

@@ -16,6 +16,7 @@ declare global {
   }
 
   interface ToDo extends ToDoForm {
+    id: string;
     isCompleted: boolean;
     dateAdded: string;
     dateCompleted: string | null;

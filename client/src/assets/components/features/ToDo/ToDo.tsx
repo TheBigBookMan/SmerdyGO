@@ -2,7 +2,6 @@
 //TODO each todo can have the main title and then user choose if they want a small description with it as well or like a subnote
 //TODO have like one main section and user can select daily, weekly etc
 
-import { useState } from "react";
 import Current from "./Current";
 import Completed from "./Completed";
 

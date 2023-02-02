@@ -51,12 +51,22 @@ export const ADD_TODO = gql`
 export const GET_TODOS = gql`
   query GetTodos($completeOrNot: Boolean!) {
     getTodos(completeOrNot: $completeOrNot) {
+      id
       title
       description
       isCompleted
       dateAdded
       dateCompleted
       timeframe
+    }
+  }
+`;
+
+export const COMPLETE_TODO = gql`
+  mutation CompleteTodo($todoId: ID!) {
+    completeTodo(todoId: $todoId) {
+      title
+      isCompleted
     }
   }
 `;

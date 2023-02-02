@@ -1,7 +1,7 @@
 import { timeframes } from "../../../utils/todocode";
 import { ChangeEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
-import { ADD_TODO, GET_TODOS } from "../../../graphql/queries";
+import { ADD_TODO, GET_TODOS, COMPLETE_TODO } from "../../../graphql/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { sortTimeframeLists } from "../../../hooks/sortTimeframeLists";
 
@@ -27,6 +27,9 @@ const Current = () => {
     GET_TODOS,
     { variables: { completeOrNot: false } }
   );
+  const [completeTodo] = useMutation(COMPLETE_TODO, {
+    refetchQueries: [{ query: GET_TODOS, variables: { completeOrNot: false } }],
+  });
 
   // ? Gets the list of todos from database and calls timeframe arranging function
   useEffect(() => {
@@ -144,7 +147,12 @@ const Current = () => {
                         >
                           {todo.title}
                         </h1>
-                        <TiTick className="text-2xl text-emerald-400 hover:border-2 hover:bg-gray-100 hover:rounded-lg hover:shadow cursor-pointer" />
+                        <TiTick
+                          onClick={() =>
+                            completeTodo({ variables: { todoId: todo.id } })
+                          }
+                          className="text-2xl text-emerald-400 hover:border-2 hover:bg-gray-100 hover:rounded-lg hover:shadow cursor-pointer"
+                        />
                       </li>
                     )}
                   </>
