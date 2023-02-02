@@ -69,7 +69,10 @@ const Current = () => {
             {timeframes.map((time) => (
               <li
                 key={time}
-                onClick={() => setTodoTimeframe(time)}
+                onClick={() => {
+                  setTodoTimeframe(time);
+                  setSelectTodo({ title: "", description: "", timeframe: "" });
+                }}
                 value={time}
                 className={`border-2 border-gray-100 p-1 rounded-t-lg cursor-pointer hover:bg-emerald-200 transition-all ${
                   todoTimeframe === time && "bg-emerald-200"

@@ -7,7 +7,7 @@ import Completed from "./Completed";
 
 const ToDo = () => {
   return (
-    <div className="h-full w-full flex flex-col gap-4 items-center px-4  text-sm">
+    <div className="h-full w-full flex flex-col gap-4 items-center text-sm">
       <Current />
       <Completed />
     </div>

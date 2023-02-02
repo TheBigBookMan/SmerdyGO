@@ -23,7 +23,7 @@ import { Routes, Route } from "react-router-dom";
 
 const Pages = () => {
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full p-1">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/todo" element={<ToDo />} />

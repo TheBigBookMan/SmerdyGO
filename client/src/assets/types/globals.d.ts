@@ -22,6 +22,11 @@ declare global {
     dateCompleted: string | null;
   }
 
+  interface GoalForm {
+    title: string;
+    description: string;
+  }
+
   interface Prototypes {
     children: React.ReactNode;
   }
