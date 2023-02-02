@@ -15,13 +15,10 @@ declare global {
     timeframe: string;
   }
 
-  interface ToDo {
-    title: string;
-    description: string;
+  interface ToDo extends ToDoForm {
     isCompleted: boolean;
     dateAdded: string;
     dateCompleted: string | null;
-    timeframe: string;
   }
 
   interface Prototypes {
