@@ -1,15 +1,20 @@
 import { ChangeEvent, useState } from "react";
 
+const goalcategories = ["health", "skills", "finance", "academia"];
+
 const CreateGoals = () => {
   const [goalForm, setGoalForm] = useState<GoalForm>({
     title: "",
     description: "",
     measurement: "",
     amount: 0,
+    category: "",
   });
 
+  //TODO add in a placeholder for the select category input
+
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setGoalForm({ ...goalForm, [e.target.name]: e.target.value });
   };
@@ -65,6 +70,19 @@ const CreateGoals = () => {
           className="pl-1 border-2 rounded-lg bg-emerald-100 "
           rows={5}
         ></textarea>
+        <select
+          value={goalForm.category}
+          onChange={(e) => handleChange(e)}
+          name="category"
+          className=" rounded-lg max-w-[260px] pl-1 border-2"
+          placeholder="category"
+        >
+          {goalcategories.map((goal) => (
+            <option key={goal} value={goal}>
+              {goal}
+            </option>
+          ))}
+        </select>
         <button
           onClick={onSubmit}
           className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[140px] h-[40px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
