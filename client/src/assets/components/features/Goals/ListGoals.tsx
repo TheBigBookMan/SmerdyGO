@@ -24,10 +24,15 @@ const ListGoals = () => {
         <div className="flex justify-between items-center pr-1">
           <h1 className="font-bold">goals</h1>
           <select
+            defaultValue={"default"}
+            value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className=" rounded-lg w-[160px] pl-1 border-2"
             placeholder="category"
           >
+            <option value={"default"} selected>
+              choose category
+            </option>
             {goalcategories.map((goal) => (
               <option key={goal} value={goal}>
                 {goal}

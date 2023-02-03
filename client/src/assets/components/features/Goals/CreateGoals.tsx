@@ -71,12 +71,16 @@ const CreateGoals = () => {
           rows={5}
         ></textarea>
         <select
+          defaultValue={"default"}
           value={goalForm.category}
           onChange={(e) => handleChange(e)}
           name="category"
           className=" rounded-lg max-w-[260px] pl-1 border-2"
           placeholder="category"
         >
+          <option value={"default"} selected>
+            choose category
+          </option>
           {goalcategories.map((goal) => (
             <option key={goal} value={goal}>
               {goal}
