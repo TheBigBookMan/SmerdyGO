@@ -10,7 +10,7 @@ const OpenScreen = () => {
   const { isLoggedIn } = UseUserContext();
 
   return (
-    <div className="font-mono w-screen h-screen+">
+    <div className="font-mono w-screen h-screen">
       <>
         {isLoggedIn ? (
           <div className="flex">
