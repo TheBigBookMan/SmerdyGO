@@ -27,6 +27,7 @@ declare global {
     description: string;
     measurement: string;
     amount: number;
+    category: string;
   }
 
   interface Prototypes {
