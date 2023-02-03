@@ -48,7 +48,9 @@ const Current = () => {
     setEnterTodo({ ...enterTodo, timeframe: todoTimeframe });
   }, [todoTimeframe]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setEnterTodo({ ...enterTodo, [e.target.name]: e.target.value });
   };
 

@@ -25,6 +25,8 @@ declare global {
   interface GoalForm {
     title: string;
     description: string;
+    measurement: string;
+    amount: number;
   }
 
   interface Prototypes {
