@@ -41,19 +41,167 @@ const SubGoals = ({ selectedGoal }: any) => {
           ) : (
             <MdCancel
               onClick={() => setDoesWantSteps(!doesWantSteps)}
-              className="mt-1  font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-red-300 bg-red-200 hover:border-red-200 transition-all"
+              className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-red-300 bg-red-200 hover:border-red-200 transition-all"
             />
           )}
         </div>
       </form>
       {!doesWantSteps ? (
         <>
-          <ul className="flex gap-2 h-3/6 w-full overflow-x-auto">
-            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full w-[200px] p-1">
-              <h1 className="font-bold text-emerald-500">subgoal 1</h1>
-              <p>save: $8,000</p>
-              <p>date done: 12/12/2023</p>
-              <p>description: if i put away $100 every week i can do that</p>
+          <ul className="flex gap-2 h-4/6 w-full max-w-5xl overflow-x-auto">
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
             </li>
           </ul>
           <div className="flex flex-col w-full h-2/6">

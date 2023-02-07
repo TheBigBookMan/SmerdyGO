@@ -10,12 +10,12 @@ const OpenScreen = () => {
   const { isLoggedIn } = UseUserContext();
 
   return (
-    <div className="font-mono w-screen h-screen">
+    <div className="font-mono w-full h-full">
       <>
         {isLoggedIn ? (
-          <div className="flex">
+          <div className="flex w-full h-full">
             <SideBar />
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full h-full">
               <Header />
               <Pages />
             </div>

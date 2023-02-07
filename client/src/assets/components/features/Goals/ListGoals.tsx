@@ -61,7 +61,7 @@ const ListGoals = ({ selectedGoal, setSelectedGoal }: any) => {
       </div>
       <div className="flex flex-col w-4/6 h-full p-1">
         <h1 className="font-bold">description</h1>
-        <p>
+        <p className="max-w-full">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores,
           tempora architecto nulla sit sequi quam, rem eaque perferendis quo
           sunt expedita dolorum at repellat soluta.

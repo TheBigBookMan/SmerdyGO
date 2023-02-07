@@ -64,9 +64,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <UserProvider>
-        <ProSidebarProvider>
-          <OpenScreen />
-        </ProSidebarProvider>
+        <div className="w-screen h-screen">
+          <ProSidebarProvider>
+            <OpenScreen />
+          </ProSidebarProvider>
+        </div>
       </UserProvider>
     </ApolloProvider>
   );
