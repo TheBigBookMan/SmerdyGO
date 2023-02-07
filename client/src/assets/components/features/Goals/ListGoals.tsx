@@ -14,9 +14,9 @@ import { IoIosArrowBack } from "react-icons/io";
 
 //TODO properly link up the category chosen to the goals displayed
 
-const ListGoals = () => {
+//! FIX ANY
+const ListGoals = ({ selectedGoal, setSelectedGoal }: any) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedGoal, setSelectedGoal] = useState<string>("");
 
   return (
     <div className="border-b flex h-2/6 w-full p-1">

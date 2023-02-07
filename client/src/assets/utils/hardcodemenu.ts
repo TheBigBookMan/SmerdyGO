@@ -4,7 +4,7 @@ export const hardcodeMenu = [
     sub: false,
     subNames: [""],
     description:
-      "Create a checkoff list for tasks on different time periods that you create.",
+      "Create a checkoff list for tasks on different time periods that you create. Once completed a task, this can automatically update progression on your goals.",
   },
   {
     name: "Goals",

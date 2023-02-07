@@ -11,8 +11,6 @@ const CreateGoals = () => {
     category: "",
   });
 
-  //TODO add in a placeholder for the select category input
-
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
