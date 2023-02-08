@@ -20,6 +20,7 @@ model User {
   email String @unique
   password String
   todos ToDo[]
+  goals Goal[]
 }
 
 model ToDo {
@@ -32,4 +33,24 @@ model ToDo {
   timeframe String
   author User @relation(fields: [authorId], references: [id])
   authorId String @db.ObjectId
+}
+
+model Goal {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  author User @relation(fields: [authorId], references: [id])
+  authorId String @db.ObjectId
+  title String
+  measurement String?
+  amount Int
+  description String?
+  category String
+  subGoals SubGoal[]
+}
+
+type SubGoal {
+  subgoal Int
+  dateCompleted DateTime @default(now())
+  dateToComplete String?
+  description String?
+  reward String?
 }
