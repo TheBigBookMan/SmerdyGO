@@ -30,6 +30,19 @@ declare global {
     category: string;
   }
 
+  interface Goal extends GoalForm {
+    subGoals: SubGoal[];
+    id: string;
+  }
+
+  interface SubGoal {
+    subgoal: number;
+    dateCompleted: string;
+    dateToComplete: string;
+    description: string;
+    reward: string;
+  }
+
   interface Prototypes {
     children: React.ReactNode;
   }

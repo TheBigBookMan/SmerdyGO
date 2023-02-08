@@ -7,7 +7,7 @@ const hardcode = [
 
 const goalcategories = ["health", "skills", "finance", "academia"];
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
 //TODO add in the better looking slider
@@ -15,8 +15,26 @@ import { IoIosArrowBack } from "react-icons/io";
 //TODO properly link up the category chosen to the goals displayed
 
 //! FIX ANY
-const ListGoals = ({ selectedGoal, setSelectedGoal }: any) => {
+const ListGoals = ({ selectedGoal, setSelectedGoal, getList }: any) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [filteredList, setFilteredList] = useState<GoalForm[] | undefined>();
+
+  useEffect(() => {
+    if (getList) {
+      const newList = categoryFilter(getList);
+      setFilteredList(newList);
+    }
+  }, [selectedCategory]);
+
+  // TODO create category filter function and set to state the filtered list
+  const categoryFilter = (list: GoalForm[]) => {
+    const filter = list.filter((item) => {
+      if (item.category === selectedCategory) {
+        return item;
+      }
+    });
+    return filter;
+  };
 
   return (
     <div className="border-b flex h-2/6 w-full p-1">
@@ -41,31 +59,31 @@ const ListGoals = ({ selectedGoal, setSelectedGoal }: any) => {
           </select>
         </div>
         <ul className="flex flex-col gap-1 p-2 h-full w-full overflow-y-auto ">
-          {hardcode.map((goal) => (
-            <li
-              onClick={() => setSelectedGoal(goal)}
-              key={goal}
-              className={`flex justify-between items-center font-bold hover:text-emerald-400 cursor-pointer min-h-[40px] w-full border-2 border-gray-100 hover:bg-gray-100 rounded-xl px-1 group ${
-                selectedGoal === goal && "bg-gray-100 text-emerald-400"
-              }`}
-            >
-              <h1>{goal}</h1>
-              <IoIosArrowBack
-                className={`transition-all ${
-                  selectedGoal === goal && "rotate-180"
+          {!filteredList ? (
+            <h1 className="text-emerald-500 font-bold">choose category...</h1>
+          ) : (
+            filteredList.map((goal) => (
+              <li
+                onClick={() => setSelectedGoal(goal.title)}
+                key={goal.title}
+                className={`flex justify-between items-center font-bold hover:text-emerald-400 cursor-pointer min-h-[40px] w-full border-2 border-gray-100 hover:bg-gray-100 rounded-xl px-1 group ${
+                  selectedGoal === goal && "bg-gray-100 text-emerald-400"
                 }`}
-              />
-            </li>
-          ))}
+              >
+                <h1>{goal.title}</h1>
+                <IoIosArrowBack
+                  className={`transition-all ${
+                    selectedGoal === goal && "rotate-180"
+                  }`}
+                />
+              </li>
+            ))
+          )}
         </ul>
       </div>
       <div className="flex flex-col w-4/6 h-full p-1">
         <h1 className="font-bold">description</h1>
-        <p className="max-w-full">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores,
-          tempora architecto nulla sit sequi quam, rem eaque perferendis quo
-          sunt expedita dolorum at repellat soluta.
-        </p>
+        <p className="max-w-full">{selectedGoal.description}</p>
       </div>
     </div>
   );
