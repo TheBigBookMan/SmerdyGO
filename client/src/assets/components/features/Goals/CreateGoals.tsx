@@ -1,8 +1,11 @@
 import { ChangeEvent, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_GOAL } from "../../../graphql/queries";
 
 const goalcategories = ["health", "skills", "finance", "academia"];
 
 const CreateGoals = () => {
+  const [addGoal, { loading, error }] = useMutation(ADD_GOAL);
   const [goalForm, setGoalForm] = useState<GoalForm>({
     title: "",
     description: "",
@@ -17,9 +20,20 @@ const CreateGoals = () => {
     setGoalForm({ ...goalForm, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(goalForm);
+    const amount = parseInt(goalForm.amount);
+    if (
+      goalForm.title.length === 0 ||
+      goalForm.amount <= 0 ||
+      goalForm.category === "choose category"
+    ) {
+      alert("Need to fill out goal title, amount and select category");
+      return;
+    }
+    await addGoal({
+      variables: { ...goalForm, amount },
+    });
   };
 
   return (
