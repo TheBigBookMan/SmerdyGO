@@ -8,6 +8,7 @@ const typeDefs = gql`
     email: String
     password: String
     todos: [ToDo]
+    goals: [Goal]
   }
 
   type ToDo {
@@ -20,6 +21,26 @@ const typeDefs = gql`
     timeframe: String
     author: User
     authorId: String
+  }
+
+  type Goal {
+    id: ID
+    author: User
+    authorId: String
+    title: String
+    measurement: String
+    amount: Int
+    description: String
+    category: String
+    subGoals: [SubGoal]
+  }
+
+  type SubGoal {
+    subgoal: Int
+    dateCompleted: DateTime
+    dateToComplete: String
+    description: String
+    reward: String
   }
 
   type Auth {
