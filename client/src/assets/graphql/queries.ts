@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// * User related
 export const SIGNUP = gql`
   mutation AddUser($email: String!, $password: String!) {
     addUser(email: $email, password: $password) {
@@ -32,6 +33,7 @@ export const LOGOUT = gql`
   }
 `;
 
+// * Todos related
 export const ADD_TODO = gql`
   mutation AddToDo($title: String!, $description: String, $timeframe: String!) {
     addTodo(title: $title, description: $description, timeframe: $timeframe) {
@@ -75,6 +77,27 @@ export const DELETE_TODO = gql`
   mutation DeleteTodo($todoId: ID!) {
     deleteTodo(todoId: $todoId) {
       id
+    }
+  }
+`;
+
+// * Goals related
+export const GET_GOALS = gql`
+  query GetGoals {
+    getGoals {
+      id
+      title
+      measurement
+      amount
+      description
+      category
+      subGoals {
+        subgoal
+        dateCompleted
+        dateToComplete
+        description
+        reward
+      }
     }
   }
 `;
