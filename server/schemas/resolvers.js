@@ -34,6 +34,7 @@ const resolvers = {
   }),
 
   Query: {
+    // * Todos related
     getTodos: async (parent, { completeOrNot }, { user }) => {
       const { id } = user;
       const { todos } = await prisma.user.findUnique({
@@ -44,17 +45,30 @@ const resolvers = {
           todos: true,
         },
       });
-
       const listTodos = todos.filter((todo) => {
         if (todo.isCompleted === completeOrNot) {
           return todo;
         }
       });
-
       return listTodos;
+    },
+    // * Goals related
+    getGoals: async (parent, args, { user }) => {
+      const { id } = user;
+      const { goals } = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          goals: true,
+        },
+      });
+      console.log(goals);
+      return goals;
     },
   },
   Mutation: {
+    // * User related
     addUser: async (parent, { email, password }, { res }) => {
       const findUser = await prisma.user.findUnique({
         where: {
@@ -99,6 +113,7 @@ const resolvers = {
       }
       return true;
     },
+    // * Todos related
     addTodo: async (parent, { title, description, timeframe }, { user }) => {
       const { id } = user;
       const createdTodo = await prisma.toDo.create({
@@ -147,6 +162,26 @@ const resolvers = {
           id: todoId,
         },
       });
+    },
+    // *Goals related
+    addGoal: async (
+      parent,
+      { title, measurement, amount, description, category },
+      { user }
+    ) => {
+      const { id } = user;
+      await prisma.goal.create({
+        data: {
+          title,
+          measurement,
+          amount,
+          description,
+          category,
+          authorId: id,
+        },
+      });
+
+      return user;
     },
   },
 };

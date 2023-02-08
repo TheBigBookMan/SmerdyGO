@@ -53,6 +53,8 @@ const typeDefs = gql`
     singleUser(id: ID!): User
     getTodo(todoId: ID!): ToDo
     getTodos(completeOrNot: Boolean!): [ToDo]
+    getGoal(goalId: ID!): Goal
+    getGoals: [Goal]
   }
 
   type Mutation {
@@ -62,6 +64,13 @@ const typeDefs = gql`
     addTodo(title: String!, description: String, timeframe: String!): User
     completeTodo(todoId: ID!): ToDo
     deleteTodo(todoId: ID!): User
+    addGoal(
+      title: String!
+      measurement: String
+      amount: Int!
+      description: String
+      category: String!
+    ): User
   }
 `;
 
