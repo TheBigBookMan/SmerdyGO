@@ -34,6 +34,13 @@ const CreateGoals = () => {
     await addGoal({
       variables: { ...goalForm, amount },
     });
+    setGoalForm({
+      title: "",
+      description: "",
+      measurement: "",
+      amount: 0,
+      category: "",
+    });
   };
 
   return (
