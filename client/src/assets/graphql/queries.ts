@@ -101,3 +101,25 @@ export const GET_GOALS = gql`
     }
   }
 `;
+
+export const ADD_GOAL = gql`
+  mutation AddGoal(
+    $title: String!
+    $amount: Int!
+    $category: String!
+    $measurement: String
+    $description: String
+  ) {
+    addGoal(
+      title: $title
+      amount: $amount
+      category: $category
+      measurement: $measurement
+      description: $description
+    ) {
+      goals {
+        id
+      }
+    }
+  }
+`;

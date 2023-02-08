@@ -63,7 +63,6 @@ const resolvers = {
           goals: true,
         },
       });
-      console.log(goals);
       return goals;
     },
   },
