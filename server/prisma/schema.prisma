@@ -49,7 +49,7 @@ model Goal {
 
 type SubGoal {
   subgoal Int
-  dateCompleted DateTime @default(now())
+  dateCompleted String?
   dateToComplete String?
   description String?
   reward String?
