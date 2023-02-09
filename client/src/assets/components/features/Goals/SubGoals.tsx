@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 import { MdCancel } from "react-icons/md";
 
@@ -12,9 +12,17 @@ import { MdCancel } from "react-icons/md";
 const SubGoals = ({ selectedGoal }: any) => {
   const [doesWantSteps, setDoesWantSteps] = useState<boolean>(true);
   const [numOfSubgoals, setNumOfSubgoals] = useState<string>("");
+  const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
 
-  console.log(numOfSubgoals);
-  console.log(typeof numOfSubgoals);
+  useEffect(() => {
+    if (selectedGoal.subGoals) {
+      setSubGoalList([...selectedGoal.subGoals]);
+    }
+  }, [selectedGoal]);
+
+  console.log(subGoalList);
+
+  // TODO clicking the tick adds amount of empty arraus in subgoals and then this shows up the subgoals list from the databse of that goal
 
   const checkSteps = (e: MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
@@ -83,56 +91,37 @@ const SubGoals = ({ selectedGoal }: any) => {
             name="numSubgoals"
             placeholder="num of subgoals..."
           />
-          {doesWantSteps ? (
-            <TiTick
-              onClick={(e) => checkSteps(e)}
-              className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
-            />
-          ) : (
-            <MdCancel
-              onClick={() => setDoesWantSteps(!doesWantSteps)}
-              className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-red-300 bg-red-200 hover:border-red-200 transition-all"
-            />
-          )}
+          <TiTick
+            onClick={(e) => checkSteps(e)}
+            className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+          />
         </div>
       </form>
       {!doesWantSteps ? (
         <>
           <ul className="flex gap-2 h-4/6 w-full max-w-5xl overflow-x-auto">
-            {!parseInt(numOfSubgoals) ? (
-              <p>need subgoals amount input...</p>
-            ) : (
-              [...Array(parseInt(numOfSubgoals))].map((e, i) => {
-                return (
-                  <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
-                    <div className="flex gap-1 justify-end">
-                      <h1 className="font-bold text-emerald-500">subgoal</h1>
-                      <p className="font-bold text-emerald-500">1</p>
-                    </div>
-                    <div className="flex gap-1">
-                      <h1 className="font-bold text-emerald-500">save:</h1>
-                      <p className="">$8,000</p>
-                    </div>
-                    <div className="flex gap-1">
-                      <h1 className="font-bold text-emerald-500">date done:</h1>
-                      <p className="">12/12/2023</p>
-                    </div>
-                    <div className="flex flex-col  overflow-y-auto">
-                      <h1 className="font-bold text-emerald-500">
-                        description:
-                      </h1>
-                      <p className="">
-                        if i put away $100 every week i can do that
-                      </p>
-                    </div>
-                    <div className="flex flex-col">
-                      <h1 className="font-bold text-emerald-500">reward:</h1>
-                      <p className="">buy new pair shoes $100</p>
-                    </div>
-                  </li>
-                );
-              })
-            )}
+            <li className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer">
+              <div className="flex gap-1 justify-end">
+                <h1 className="font-bold text-emerald-500">subgoal</h1>
+                <p className="font-bold text-emerald-500">1</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">save:</h1>
+                <p className="">$8,000</p>
+              </div>
+              <div className="flex gap-1">
+                <h1 className="font-bold text-emerald-500">date done:</h1>
+                <p className="">12/12/2023</p>
+              </div>
+              <div className="flex flex-col  overflow-y-auto">
+                <h1 className="font-bold text-emerald-500">description:</h1>
+                <p className="">if i put away $100 every week i can do that</p>
+              </div>
+              <div className="flex flex-col">
+                <h1 className="font-bold text-emerald-500">reward:</h1>
+                <p className="">buy new pair shoes $100</p>
+              </div>
+            </li>
           </ul>
           <div className="flex flex-col w-full h-2/6">
             <p>
