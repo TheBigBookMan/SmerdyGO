@@ -17,7 +17,6 @@ const ListGoals = ({ selectedGoal, setSelectedGoal, getList }: any) => {
     }
   }, [selectedCategory]);
 
-  // TODO create category filter function and set to state the filtered list
   const categoryFilter = (list: GoalForm[]) => {
     const filter = list.filter((item) => {
       if (item.category === selectedCategory) {
