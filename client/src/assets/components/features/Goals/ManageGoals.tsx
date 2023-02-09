@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_GOALS } from "../../../graphql/queries";
 
 const ManageGoals = () => {
-  const [selectedGoal, setSelectedGoal] = useState<string>("");
+  const [selectedGoal, setSelectedGoal] = useState<Goal | undefined>();
   const { data: goalsList, loading } = useQuery(GET_GOALS);
   const [getList, setGetList] = useState<GoalForm[] | undefined>();
 

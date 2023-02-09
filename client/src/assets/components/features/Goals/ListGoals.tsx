@@ -1,18 +1,9 @@
-const hardcode = [
-  "Save $27k",
-  "run a 1/2 marathon",
-  "read 25 books in a year",
-  "learn Rust",
-];
-
 const goalcategories = ["health", "skills", "finance", "academia"];
 
 import { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
 //TODO add in the better looking slider
-
-//TODO properly link up the category chosen to the goals displayed
 
 //! FIX ANY
 const ListGoals = ({ selectedGoal, setSelectedGoal, getList }: any) => {
@@ -64,7 +55,7 @@ const ListGoals = ({ selectedGoal, setSelectedGoal, getList }: any) => {
           ) : (
             filteredList.map((goal) => (
               <li
-                onClick={() => setSelectedGoal(goal.title)}
+                onClick={() => setSelectedGoal(goal)}
                 key={goal.title}
                 className={`flex justify-between items-center font-bold hover:text-emerald-400 cursor-pointer min-h-[40px] w-full border-2 border-gray-100 hover:bg-gray-100 rounded-xl px-1 group ${
                   selectedGoal === goal && "bg-gray-100 text-emerald-400"
@@ -83,7 +74,10 @@ const ListGoals = ({ selectedGoal, setSelectedGoal, getList }: any) => {
       </div>
       <div className="flex flex-col w-4/6 h-full p-1">
         <h1 className="font-bold">description</h1>
-        <p className="max-w-full">{selectedGoal.description}</p>
+
+        {selectedGoal && (
+          <p className="max-w-full">{selectedGoal.description}</p>
+        )}
       </div>
     </div>
   );

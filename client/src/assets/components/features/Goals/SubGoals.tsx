@@ -8,6 +8,7 @@ import { MdCancel } from "react-icons/md";
 
 //TODO for goal can have each list item show the stat,s and then user clicks on it and a modal comes up with the ability to edit the goal--- just makes it bit easier than having the edit and show on the small item
 
+// ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
   const [doesWantSteps, setDoesWantSteps] = useState<boolean>(false);
   const [numOfSubgoals, setNumOfSubgoals] = useState<number>(0);
@@ -16,7 +17,9 @@ const SubGoals = ({ selectedGoal }: any) => {
     <div className="w-full h-full p-1 flex flex-col">
       <div className="flex gap-3">
         <h1 className="font-bold">subgoals- </h1>
-        <h1 className="font-bold">{selectedGoal}: </h1>
+        {selectedGoal && (
+          <h1 className="font-bold text-emerald-500">{selectedGoal.title}: </h1>
+        )}
         <h1 className="">goal amount: $27,000</h1>
       </div>
       <p>
