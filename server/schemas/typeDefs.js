@@ -37,7 +37,7 @@ const typeDefs = gql`
 
   type SubGoal {
     subgoal: Int
-    dateCompleted: DateTime
+    dateCompleted: String
     dateToComplete: String
     description: String
     reward: String
@@ -71,6 +71,13 @@ const typeDefs = gql`
       description: String
       category: String!
     ): User
+    addAmountSubGoal(goalId: ID!, numSubGoals: Int!): Goal
+    addSubGoal(
+      subgoal: Int!
+      dateToComplete: String
+      description: String
+      reward: String
+    ): Goal
   }
 `;
 
