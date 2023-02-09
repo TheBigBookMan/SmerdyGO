@@ -123,3 +123,17 @@ export const ADD_GOAL = gql`
     }
   }
 `;
+
+export const ADD_AMOUNT_SUBGOAL = gql`
+  mutation AddAmountSubGoal($goalId: ID!, $numSubGoals: Int!) {
+    addAmountSubGoal(goalId: $goalId, numSubGoals: $numSubGoals) {
+      subGoals {
+        subgoal
+        dateCompleted
+        dateToComplete
+        description
+        reward
+      }
+    }
+  }
+`;
