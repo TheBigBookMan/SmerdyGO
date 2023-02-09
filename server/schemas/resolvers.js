@@ -179,8 +179,29 @@ const resolvers = {
           authorId: id,
         },
       });
-
       return user;
+    },
+    addAmountSubGoal: async (parent, { goalId, numSubGoals }, { user }) => {
+      for (let i = 1; i <= numSubGoals; i++) {
+        const foundGoal = await prisma.goal.update({
+          where: {
+            id: goalId,
+          },
+          data: {
+            subGoals: {
+              push: [
+                {
+                  subgoal: 0,
+                  dateCompleted: "",
+                  dateToComplete: "",
+                  description: "",
+                  reward: "",
+                },
+              ],
+            },
+          },
+        });
+      }
     },
   },
 };
