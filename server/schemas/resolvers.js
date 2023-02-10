@@ -182,26 +182,27 @@ const resolvers = {
       return user;
     },
     addAmountSubGoal: async (parent, { goalId, numSubGoals }, { user }) => {
+      let newArray = [];
       for (let i = 1; i <= numSubGoals; i++) {
-        await prisma.goal.update({
-          where: {
-            id: goalId,
-          },
-          data: {
-            subGoals: {
-              push: [
-                {
-                  subgoal: 0,
-                  dateCompleted: "",
-                  dateToComplete: "",
-                  description: "",
-                  reward: "",
-                },
-              ],
-            },
-          },
+        newArray.push({
+          subgoal: 0,
+          dateCompleted: "",
+          dateToComplete: "",
+          description: "",
+          reward: "",
         });
       }
+      await prisma.goal.update({
+        where: {
+          id: goalId,
+        },
+        data: {
+          subGoals: {
+            set: [...newArray],
+          },
+        },
+      });
+
       const foundGoal = await prisma.goal.findUnique({
         where: {
           id: goalId,
