@@ -1,5 +1,6 @@
 import { ChangeEvent, MouseEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
+import { AiOutlineEdit } from "react-icons/ai";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_AMOUNT_SUBGOAL } from "../../../graphql/queries";
 
@@ -7,11 +8,12 @@ import { ADD_AMOUNT_SUBGOAL } from "../../../graphql/queries";
 
 //TODO can make each subgoal have a number that indicates where it is in the goal path and then when they reload the page after creating it or have a "refresh" button then the query call can do an ordered return based on that number in the list
 
-//TODO for goal can have each list item show the stat,s and then user clicks on it and a modal comes up with the ability to edit the goal--- just makes it bit easier than having the edit and show on the small item
+//TODO each subgoal has an edit button and clicking it allows user to input the subgoal data, so it will essentially be a switch between <input> html and thn just the actual <p> of the current data, once edit is done then just update the data info and do a refetch of the query data
+// TODO when click edit button in then turns into a tick for complete
 
 // ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
-  const [doesWantSteps, setDoesWantSteps] = useState<boolean>(true);
+  const [enableEditMode, setEnableEditMode] = useState<boolean>(false);
   const [numOfSubgoals, setNumOfSubgoals] = useState<string>("");
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [addSubGoalAmount, { data: goalSubGoals, loading, error }] =
@@ -85,8 +87,8 @@ const SubGoals = ({ selectedGoal }: any) => {
         stones in your journey. rewarding yourself for these stepping stones can
         be great motivator to keep pushing to the end-goal...
       </p>
-      <form className="flex flex-col">
-        <div className="flex gap-2 items-center">
+      <div className="flex gap-10 items-center">
+        <form className="flex gap-2 items-center">
           <h1 className="font-bold">how many steps do you want?</h1>
           <input
             value={numOfSubgoals}
@@ -100,37 +102,63 @@ const SubGoals = ({ selectedGoal }: any) => {
             onClick={(e) => checkSteps(e)}
             className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
           />
-        </div>
-      </form>
+        </form>
+        {enableEditMode ? (
+          <div
+            onClick={() => setEnableEditMode(!enableEditMode)}
+            className="flex gap-2 items-center"
+          >
+            <h1 className="font-bold">edit subgoals</h1>
+            <AiOutlineEdit className="mt-1 p-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
+          </div>
+        ) : (
+          <div
+            onClick={() => setEnableEditMode(!enableEditMode)}
+            className="flex gap-2 items-center"
+          >
+            <h1 className="font-bold">finish editing subgoals</h1>
+            <TiTick className="mt-1 font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
+          </div>
+        )}
+      </div>
+
       {subGoalList.length > 0 ? (
         <>
           <ul className="flex gap-2 h-4/6 w-full max-w-5xl overflow-x-auto">
             {subGoalList.map((goal, idx) => (
               <li
                 key={goal.subgoal + idx}
-                className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1 hover:bg-gray-100 hover:shadow-xl cursor-pointer"
+                className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1"
               >
-                <div className="flex gap-1 justify-end">
-                  <h1 className="font-bold text-emerald-500">subgoal</h1>
-                  <p className="font-bold text-emerald-500">{idx + 1}</p>
-                </div>
-                <div className="flex gap-1">
-                  <h1 className="font-bold text-emerald-500">step:</h1>
-                  <p>{selectedGoal.measurement}</p>
-                  <p>{goal.subgoal}</p>
-                </div>
-                <div className="flex gap-1">
-                  <h1 className="font-bold text-emerald-500">date done:</h1>
-                  <p className="">{goal.dateToComplete}</p>
-                </div>
-                <div className="flex flex-col  overflow-y-auto">
-                  <h1 className="font-bold text-emerald-500">description:</h1>
-                  <p className="">{goal.description}</p>
-                </div>
-                <div className="flex flex-col">
-                  <h1 className="font-bold text-emerald-500">reward:</h1>
-                  <p className="">{goal.reward}</p>
-                </div>
+                {!enableEditMode ? (
+                  <TiTick />
+                ) : (
+                  <>
+                    <div className="flex gap-1 justify-end items-center">
+                      <h1 className="font-bold text-emerald-500">subgoal</h1>
+                      <p className="font-bold text-emerald-500">{idx + 1}</p>
+                    </div>
+                    <div className="flex gap-1">
+                      <h1 className="font-bold text-emerald-500">step:</h1>
+                      <p>{selectedGoal.measurement}</p>
+                      <p>{goal.subgoal}</p>
+                    </div>
+                    <div className="flex gap-1">
+                      <h1 className="font-bold text-emerald-500">date done:</h1>
+                      <p className="">{goal.dateToComplete}</p>
+                    </div>
+                    <div className="flex flex-col  overflow-y-auto">
+                      <h1 className="font-bold text-emerald-500">
+                        description:
+                      </h1>
+                      <p className="">{goal.description}</p>
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="font-bold text-emerald-500">reward:</h1>
+                      <p className="">{goal.reward}</p>
+                    </div>
+                  </>
+                )}
               </li>
             ))}
           </ul>
