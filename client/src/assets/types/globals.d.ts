@@ -41,6 +41,7 @@ declare global {
     dateToComplete: string;
     description: string;
     reward: string;
+    editMode: boolean;
   }
 
   interface Prototypes {

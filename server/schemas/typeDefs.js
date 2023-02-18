@@ -41,6 +41,7 @@ const typeDefs = gql`
     dateToComplete: String
     description: String
     reward: String
+    editMode: Boolean
   }
 
   type Auth {
