@@ -131,9 +131,48 @@ const SubGoals = ({ selectedGoal }: any) => {
                 className="flex flex-col border-2 shadow-lg border-emerald-200 rounded-xl h-full min-w-[200px] max-w-[200px] p-1"
               >
                 {!enableEditMode ? (
-                  <TiTick />
+                  <form className="flex flex-col gap-2">
+                    <div className="flex gap-1 justify-end items-center">
+                      <h1 className="font-bold text-emerald-500">subgoal</h1>
+                      <p className="font-bold text-emerald-500">{idx + 1}</p>
+                    </div>
+                    <div className="flex gap-1">
+                      <h1 className="font-bold text-emerald-500">step:</h1>
+                      <input
+                        type="text"
+                        className="w-full bg-emerald-100 rounded-lg pl-1"
+                        placeholder={`num of ${selectedGoal.measurement}`}
+                      />
+                    </div>
+                    <div className="flex gap-1">
+                      <h1 className="font-bold text-emerald-500">fin:</h1>
+                      <input
+                        type="text"
+                        className="w-full bg-emerald-100 rounded-lg pl-1"
+                        placeholder={`date to complete...`}
+                      />
+                    </div>
+                    <div className="flex flex-col  overflow-y-auto">
+                      <h1 className="font-bold text-emerald-500">
+                        description:
+                      </h1>
+                      <textarea
+                        className="w-full bg-emerald-100 rounded-lg pl-1"
+                        placeholder="write comment..."
+                        rows={3}
+                      ></textarea>
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="font-bold text-emerald-500">reward:</h1>
+                      <input
+                        type="text"
+                        className="w-full bg-emerald-100 rounded-lg pl-1"
+                        placeholder={`reward yourself...`}
+                      />
+                    </div>
+                  </form>
                 ) : (
-                  <>
+                  <div className="flex flex-col gap-2">
                     <div className="flex gap-1 justify-end items-center">
                       <h1 className="font-bold text-emerald-500">subgoal</h1>
                       <p className="font-bold text-emerald-500">{idx + 1}</p>
@@ -144,7 +183,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                       <p>{goal.subgoal}</p>
                     </div>
                     <div className="flex gap-1">
-                      <h1 className="font-bold text-emerald-500">date done:</h1>
+                      <h1 className="font-bold text-emerald-500">fin:</h1>
                       <p className="">{goal.dateToComplete}</p>
                     </div>
                     <div className="flex flex-col  overflow-y-auto">
@@ -157,7 +196,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                       <h1 className="font-bold text-emerald-500">reward:</h1>
                       <p className="">{goal.reward}</p>
                     </div>
-                  </>
+                  </div>
                 )}
               </li>
             ))}
