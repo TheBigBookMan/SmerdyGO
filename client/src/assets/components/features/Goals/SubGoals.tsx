@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent, useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_AMOUNT_SUBGOAL } from "../../../graphql/queries";
+import { ADD_AMOUNT_SUBGOAL, ADD_SUB_GOALS } from "../../../graphql/queries";
 
 // TODO add in the nicer scrollbar for the subgoals section X
 
@@ -18,6 +18,8 @@ const SubGoals = ({ selectedGoal }: any) => {
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [addSubGoalAmount, { data: goalSubGoals, loading, error }] =
     useMutation(ADD_AMOUNT_SUBGOAL);
+  const [addSubGoals, { data: newSubGoals, loading: newSubGoalLoading }] =
+    useMutation(ADD_SUB_GOALS);
 
   useEffect(() => {
     const listSubGoals = selectedGoal?.subGoals;
@@ -25,7 +27,8 @@ const SubGoals = ({ selectedGoal }: any) => {
       setSubGoalList([...listSubGoals]);
     }
   }, [selectedGoal]);
-
+  console.log(subGoalList);
+  console.log(newSubGoals);
   useEffect(() => {
     const returnedSubGoals = goalSubGoals?.addAmountSubGoal;
     if (returnedSubGoals) {
@@ -55,6 +58,9 @@ const SubGoals = ({ selectedGoal }: any) => {
       setNumOfSubgoals(e.target.value);
     }
   };
+
+  // TODO need to add in conditional rendering for each input on the form-- condition if the subgoal has writing in them and then render that if not tehn render the placeolder
+  // TODO need to also do the value input is saved to an array of the subgoal objects---- not sure
 
   return (
     <div className="w-full h-full p-1 flex flex-col">
