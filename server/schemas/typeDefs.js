@@ -79,7 +79,7 @@ const typeDefs = gql`
       category: String!
     ): User
     addAmountSubGoal(goalId: ID!, numSubGoals: Int!): Goal
-    addSubGoal(subGoalsArray: [SubGoals]): Goal
+    addSubGoals(goalId: ID!, subGoalsArray: [SubGoals]): Goal
   }
 `;
 

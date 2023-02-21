@@ -210,6 +210,24 @@ const resolvers = {
       });
       return foundGoal;
     },
+    addSubGoals: async (parent, { goalId, subGoalsArray }, { user }) => {
+      await prisma.goal.update({
+        where: {
+          id: goalId,
+        },
+        data: {
+          subGoals: {
+            set: [...subGoalsArray],
+          },
+        },
+      });
+      const foundGoal = await prisma.goal.findUnique({
+        where: {
+          id: goalId,
+        },
+      });
+      return foundGoal;
+    },
   },
 };
 
