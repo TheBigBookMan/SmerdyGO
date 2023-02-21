@@ -27,8 +27,10 @@ const SubGoals = ({ selectedGoal }: any) => {
       setSubGoalList([...listSubGoals]);
     }
   }, [selectedGoal]);
-  console.log(subGoalList);
-  console.log(newSubGoals);
+
+  // console.log(subGoalList);
+  // console.log(newSubGoals);
+
   useEffect(() => {
     const returnedSubGoals = goalSubGoals?.addAmountSubGoal;
     if (returnedSubGoals) {
@@ -58,6 +60,34 @@ const SubGoals = ({ selectedGoal }: any) => {
       setNumOfSubgoals(e.target.value);
     }
   };
+
+  // !! function not fully updating the new propery value properly so need to keep adjusting
+  const changeSubGoalValue = (
+    e: ChangeEvent<HTMLInputElement>,
+    idx: number
+  ) => {
+    e.preventDefault();
+    let subGoalIndex = subGoalList[idx];
+    let oldSubGoalList = subGoalList;
+    const value = e.target.value;
+    // console.log(subGoalIndex);
+    console.log(e.target.name);
+    console.log(e.target.value);
+    subGoalIndex = {
+      ...subGoalIndex,
+      [e.target.name]: value,
+    };
+    console.log(subGoalIndex);
+    oldSubGoalList = [...oldSubGoalList, subGoalIndex];
+    console.log(oldSubGoalList);
+
+    // setSubGoalList([
+    //   ...subGoalList,
+    //   { ...subGoalIndex, [e.target.name]: value },
+    // ]);
+  };
+
+  // TODO need a function for the onChange of each subgoal edit which will look for the position in array based on the idx given in the map, then this will update that objects property based on the name and then change the value???
 
   // TODO need to add in conditional rendering for each input on the form-- condition if the subgoal has writing in them and then render that if not tehn render the placeolder
   // TODO need to also do the value input is saved to an array of the subgoal objects---- not sure
@@ -145,6 +175,9 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <div className="flex gap-1">
                       <h1 className="font-bold text-emerald-500">step:</h1>
                       <input
+                        onChange={(e) => changeSubGoalValue(e, idx)}
+                        name="subgoal"
+                        value={goal.subgoal ? goal.subgoal : ""}
                         type="text"
                         className="w-full bg-emerald-100 rounded-lg pl-1"
                         placeholder={`num of ${selectedGoal.measurement}`}
@@ -153,6 +186,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <div className="flex gap-1">
                       <h1 className="font-bold text-emerald-500">fin:</h1>
                       <input
+                        name="dateToComplete"
                         type="text"
                         className="w-full bg-emerald-100 rounded-lg pl-1"
                         placeholder={`date to complete...`}
@@ -163,6 +197,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                         description:
                       </h1>
                       <textarea
+                        name="description"
                         className="w-full bg-emerald-100 rounded-lg pl-1"
                         placeholder="write comment..."
                         rows={3}
@@ -171,6 +206,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <div className="flex flex-col">
                       <h1 className="font-bold text-emerald-500">reward:</h1>
                       <input
+                        name="reward"
                         type="text"
                         className="w-full bg-emerald-100 rounded-lg pl-1"
                         placeholder={`reward yourself...`}
