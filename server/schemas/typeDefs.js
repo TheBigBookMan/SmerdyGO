@@ -43,6 +43,13 @@ const typeDefs = gql`
     reward: String
   }
 
+  input SubGoals {
+    subgoal: Int
+    dateToComplete: String
+    description: String
+    reward: String
+  }
+
   type Auth {
     token: ID
     user: User
@@ -72,12 +79,7 @@ const typeDefs = gql`
       category: String!
     ): User
     addAmountSubGoal(goalId: ID!, numSubGoals: Int!): Goal
-    addSubGoal(
-      subgoal: Int!
-      dateToComplete: String
-      description: String
-      reward: String
-    ): Goal
+    addSubGoal(subGoalsArray: [SubGoals]): Goal
   }
 `;
 

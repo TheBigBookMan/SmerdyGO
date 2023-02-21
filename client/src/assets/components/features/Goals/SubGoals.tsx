@@ -13,7 +13,7 @@ import { ADD_AMOUNT_SUBGOAL } from "../../../graphql/queries";
 
 // ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
-  const [enableEditMode, setEnableEditMode] = useState<boolean>(false);
+  const [enableEditMode, setEnableEditMode] = useState<boolean>(true);
   const [numOfSubgoals, setNumOfSubgoals] = useState<string>("");
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [addSubGoalAmount, { data: goalSubGoals, loading, error }] =
