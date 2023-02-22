@@ -69,23 +69,22 @@ const SubGoals = ({ selectedGoal }: any) => {
     e.preventDefault();
     let subGoalIndex = subGoalList[idx];
     let oldSubGoalList = subGoalList;
-    const value = e.target.value;
-    // console.log(subGoalIndex);
-    console.log(e.target.name);
-    console.log(e.target.value);
+    let value;
+    if (e.target.name === "subgoal") {
+      value = parseInt(e.target.value);
+    } else {
+      value = e.target.value;
+    }
     subGoalIndex = {
       ...subGoalIndex,
       [e.target.name]: value,
     };
-    console.log(subGoalIndex);
-    oldSubGoalList = [...oldSubGoalList, subGoalIndex];
     console.log(oldSubGoalList);
-
-    // setSubGoalList([
-    //   ...subGoalList,
-    //   { ...subGoalIndex, [e.target.name]: value },
-    // ]);
+    oldSubGoalList[idx] = subGoalIndex;
+    console.log(oldSubGoalList);
+    setSubGoalList([...oldSubGoalList]);
   };
+  console.log(subGoalList);
 
   // TODO need a function for the onChange of each subgoal edit which will look for the position in array based on the idx given in the map, then this will update that objects property based on the name and then change the value???
 
@@ -177,7 +176,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                       <input
                         onChange={(e) => changeSubGoalValue(e, idx)}
                         name="subgoal"
-                        value={goal.subgoal ? goal.subgoal : ""}
+                        value={goal.subgoal}
                         type="text"
                         className="w-full bg-emerald-100 rounded-lg pl-1"
                         placeholder={`num of ${selectedGoal.measurement}`}
