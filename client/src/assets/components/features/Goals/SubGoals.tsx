@@ -92,7 +92,9 @@ const SubGoals = ({ selectedGoal }: any) => {
   // TODO need to add in conditional rendering for each input on the form-- condition if the subgoal has writing in them and then render that if not tehn render the placeolder
   // TODO need to also do the value input is saved to an array of the subgoal objects---- not sure
 
-  const setNewSubGoals = async (e) => {
+  const setNewSubGoals = async (
+    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
+  ) => {
     e.preventDefault();
     try {
       const goalId = selectedGoal.id;
