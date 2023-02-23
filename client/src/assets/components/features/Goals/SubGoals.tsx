@@ -28,7 +28,7 @@ const SubGoals = ({ selectedGoal }: any) => {
       setSubGoalList([...listSubGoals]);
       setEditSubGoalList([...listSubGoals]);
     }
-  }, [selectedGoal]);
+  }, [selectedGoal, newSubGoals]);
 
   // console.log(subGoalList);
   // console.log(newSubGoals);
@@ -81,18 +81,29 @@ const SubGoals = ({ selectedGoal }: any) => {
       ...subGoalIndex,
       [e.target.name]: value,
     };
-    console.log(newSubGoalList);
     newSubGoalList[idx] = subGoalIndex;
-    console.log(newSubGoalList);
     setEditSubGoalList([...newSubGoalList]);
   };
-  console.log(subGoalList);
-  console.log(editSubGoalList);
+  // console.log(subGoalList);
+  // console.log(editSubGoalList);
 
   // TODO need a function for the onChange of each subgoal edit which will look for the position in array based on the idx given in the map, then this will update that objects property based on the name and then change the value???
 
   // TODO need to add in conditional rendering for each input on the form-- condition if the subgoal has writing in them and then render that if not tehn render the placeolder
   // TODO need to also do the value input is saved to an array of the subgoal objects---- not sure
+
+  const setNewSubGoals = async (e) => {
+    e.preventDefault();
+    try {
+      const goalId = selectedGoal.id;
+      console.log(editSubGoalList);
+      await addSubGoals({
+        variables: { goalId, subGoalsArray: [...editSubGoalList] },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="w-full h-full p-1 flex flex-col">
@@ -151,7 +162,10 @@ const SubGoals = ({ selectedGoal }: any) => {
           </div>
         ) : (
           <div
-            onClick={() => setEnableEditMode(!enableEditMode)}
+            onClick={(e) => {
+              setEnableEditMode(!enableEditMode);
+              setNewSubGoals(e);
+            }}
             className="flex gap-2 items-center"
           >
             <h1 className="font-bold">finish editing subgoals</h1>

@@ -211,6 +211,7 @@ const resolvers = {
       return foundGoal;
     },
     addSubGoals: async (parent, { goalId, subGoalsArray }, { user }) => {
+      console.log(subGoalsArray);
       await prisma.goal.update({
         where: {
           id: goalId,
