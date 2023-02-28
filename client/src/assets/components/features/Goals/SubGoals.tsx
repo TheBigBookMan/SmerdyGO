@@ -69,19 +69,23 @@ const SubGoals = ({ selectedGoal }: any) => {
     idx: number
   ) => {
     e.preventDefault();
-    let subGoalIndex = subGoalList[idx];
-    let newSubGoalList = subGoalList;
+    let subGoalIndex = { ...subGoalList[idx] };
+    let newSubGoalList = [...subGoalList];
+    console.log(newSubGoalList);
     let value;
     if (e.target.name === "subgoal") {
       value = parseInt(e.target.value);
     } else {
       value = e.target.value;
     }
+
     subGoalIndex = {
       ...subGoalIndex,
       [e.target.name]: value,
     };
+    console.log(subGoalIndex);
     newSubGoalList[idx] = subGoalIndex;
+
     setEditSubGoalList([...newSubGoalList]);
   };
   // console.log(subGoalList);
