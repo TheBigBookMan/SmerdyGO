@@ -65,25 +65,23 @@ const SubGoals = ({ selectedGoal }: any) => {
 
   // !! function not fully updating the new propery value properly so need to keep adjusting
   const changeSubGoalValue = (
-    e: ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     idx: number
   ) => {
     e.preventDefault();
     let subGoalIndex = { ...subGoalList[idx] };
     let newSubGoalList = [...subGoalList];
-    console.log(newSubGoalList);
     let value;
     if (e.target.name === "subgoal") {
       value = parseInt(e.target.value);
     } else {
       value = e.target.value;
     }
-
+    console.log(value);
     subGoalIndex = {
       ...subGoalIndex,
       [e.target.name]: value,
     };
-    console.log(subGoalIndex);
     newSubGoalList[idx] = subGoalIndex;
 
     setEditSubGoalList([...newSubGoalList]);
@@ -205,19 +203,23 @@ const SubGoals = ({ selectedGoal }: any) => {
                           <input
                             onChange={(e) => changeSubGoalValue(e, idx)}
                             name="subgoal"
-                            value={goal.subgoal}
+                            // value={goal.subgoal}
                             type="text"
                             className="w-full bg-emerald-100 rounded-lg pl-1"
-                            placeholder={`num of ${selectedGoal.measurement}`}
+                            placeholder={`${goal.subgoal}`}
+                            // placeholder={`num of ${selectedGoal.measurement}`}
                           />
                         </div>
                         <div className="flex gap-1">
                           <h1 className="font-bold text-emerald-500">fin:</h1>
                           <input
+                            // value={goal.dateToComplete}
+                            onChange={(e) => changeSubGoalValue(e, idx)}
                             name="dateToComplete"
                             type="text"
                             className="w-full bg-emerald-100 rounded-lg pl-1"
-                            placeholder={`date to complete...`}
+                            placeholder={`${goal.dateToComplete}`}
+                            // placeholder={`date to complete...`}
                           />
                         </div>
                         <div className="flex flex-col  overflow-y-auto">
@@ -225,9 +227,12 @@ const SubGoals = ({ selectedGoal }: any) => {
                             description:
                           </h1>
                           <textarea
+                            // value={goal.description}
                             name="description"
+                            onChange={(e) => changeSubGoalValue(e, idx)}
                             className="w-full bg-emerald-100 rounded-lg pl-1"
-                            placeholder="write comment..."
+                            placeholder={`${goal.description}`}
+                            // placeholder="write comment..."
                             rows={3}
                           ></textarea>
                         </div>
@@ -236,10 +241,13 @@ const SubGoals = ({ selectedGoal }: any) => {
                             reward:
                           </h1>
                           <input
+                            onChange={(e) => changeSubGoalValue(e, idx)}
+                            // value={goal.reward}
                             name="reward"
                             type="text"
                             className="w-full bg-emerald-100 rounded-lg pl-1"
-                            placeholder={`reward yourself...`}
+                            placeholder={`${goal.reward}`}
+                            // placeholder={`reward yourself...`}
                           />
                         </div>
                       </form>
