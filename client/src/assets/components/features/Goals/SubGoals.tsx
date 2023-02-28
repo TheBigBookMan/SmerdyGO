@@ -77,7 +77,7 @@ const SubGoals = ({ selectedGoal }: any) => {
     } else {
       value = e.target.value;
     }
-    console.log(value);
+
     subGoalIndex = {
       ...subGoalIndex,
       [e.target.name]: value,

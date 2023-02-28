@@ -45,6 +45,7 @@ const typeDefs = gql`
 
   input SubGoals {
     subgoal: Int
+    dateCompleted: String
     dateToComplete: String
     description: String
     reward: String
