@@ -129,6 +129,7 @@ export const GET_SUB_GOAL = gql`
       dateToComplete
       description
       reward
+      editMode
     }
   }
 `;
@@ -144,6 +145,7 @@ export const GET_SUB_GOALS = gql`
       dateToComplete
       description
       reward
+      editMode
     }
   }
 `;

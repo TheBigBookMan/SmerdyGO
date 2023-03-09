@@ -57,4 +57,5 @@ model SubGoal {
   dateToComplete String?
   description String?
   reward String?
+  editMode Boolean @default(false)
 }
