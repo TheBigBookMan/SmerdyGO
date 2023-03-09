@@ -118,6 +118,16 @@ export const ADD_GOAL = gql`
 `;
 
 // * SubGoal related
+export const ADD_SUB_GOAL = gql`
+  mutation AddSubGoal($goalId: ID!) {
+    addSubGoal(goalId: $goalId) {
+      id
+      goalId
+      editMode
+    }
+  }
+`;
+
 export const GET_SUB_GOAL = gql`
   query GetSubGoal($subGoalId: ID!) {
     getSubGoal(subGoalId: $subGoalId) {

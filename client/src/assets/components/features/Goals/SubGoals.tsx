@@ -8,6 +8,7 @@ import {
   GET_SUB_GOALS,
   GET_SUB_GOAL,
   SUB_GOAL_EDIT,
+  ADD_SUB_GOAL,
 } from "../../../graphql/queries";
 
 // TODO add in the nicer scrollbar for the subgoals section X
@@ -26,8 +27,12 @@ const SubGoals = ({ selectedGoal }: any) => {
   const { data: databaseSubGoals, loading } = useQuery(GET_SUB_GOALS, {
     variables: { goalId },
   });
-  const [addSubGoal, { data: newSubGoal, loading: newSubGoalLoading }] =
+  const [updateSubGoal, { data: newSubGoal, loading: newSubGoalLoading }] =
     useMutation(UPDATE_SUB_GOAL);
+  const [addSubGoal, { data: addedSubGoal, loading: loadingAddedSubGoal }] =
+    useMutation(ADD_SUB_GOAL, {
+      refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
+    });
 
   useEffect(() => {
     const listSubGoals = databaseSubGoals?.getSubGoals;
@@ -70,7 +75,10 @@ const SubGoals = ({ selectedGoal }: any) => {
       </p>
       <div className="flex gap-2 items-center">
         <h1 className="font-bold">add new subgoal</h1>
-        <TbPlaylistAdd className="font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
+        <TbPlaylistAdd
+          onClick={() => addSubGoal({ variables: { goalId } })}
+          className="font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+        />
       </div>
 
       {subGoalList.length === 0 ? (

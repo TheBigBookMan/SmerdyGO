@@ -202,7 +202,13 @@ const resolvers = {
       return user;
     },
     // * SubGoal related
-    addSubGoal: async (parent, { goalId }, { user }) => {},
+    addSubGoal: async (parent, { goalId }, { user }) => {
+      const createSubGoal = await prisma.subGoal.create({
+        data: {
+          goalId,
+        },
+      });
+    },
     updateSubGoal: async (
       parent,
       { subGoalId, title, amount, dateToComplete, description, reward },
@@ -212,7 +218,14 @@ const resolvers = {
         where: {
           id: subGoalId,
         },
-        data: { title, amount, dateToComplete, description, reward },
+        data: {
+          title,
+          amount,
+          dateToComplete,
+          description,
+          reward,
+          editMode: false,
+        },
       });
       return createSubGoal;
     },
