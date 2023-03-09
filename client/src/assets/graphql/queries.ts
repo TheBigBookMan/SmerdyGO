@@ -175,3 +175,19 @@ export const ADD_SUB_GOAL = gql`
     }
   }
 `;
+
+export const SUB_GOAL_EDIT = gql`
+  mutation SubGoalEdit($subGoalId: ID!) {
+    subGoalEdit(subGoalId: $subGoalId) {
+      id
+      goalId
+      title
+      amount
+      dateCompleted
+      dateToComplete
+      description
+      reward
+      editMode
+    }
+  }
+`;

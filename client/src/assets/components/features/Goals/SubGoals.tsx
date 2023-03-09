@@ -6,6 +6,7 @@ import {
   ADD_SUB_GOAL,
   GET_SUB_GOALS,
   GET_SUB_GOAL,
+  SUB_GOAL_EDIT,
 } from "../../../graphql/queries";
 
 // TODO add in the nicer scrollbar for the subgoals section X

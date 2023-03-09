@@ -86,6 +86,7 @@ const typeDefs = gql`
       description: String
       reward: String
     ): Goal
+    subGoalEdit(subGoalId: ID!): SubGoal
   }
 `;
 
