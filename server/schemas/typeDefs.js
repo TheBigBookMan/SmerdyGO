@@ -60,7 +60,7 @@ const typeDefs = gql`
     getGoal(goalId: ID!): Goal
     getGoals: [Goal]
     getSubGoal(subGoalId: ID): SubGoal
-    getSubGoals: [SubGoal]
+    getSubGoals(goalId: ID): [SubGoal]
   }
 
   type Mutation {

@@ -65,6 +65,25 @@ const resolvers = {
       });
       return goals;
     },
+    getSubGoal: async (parent, { subGoalId }, { user }) => {
+      const subGoal = await prisma.subGoal.findUnique({
+        where: {
+          id: subGoalId,
+        },
+      });
+      return subGoal;
+    },
+    getSubGoals: async (parent, { goalId }, { user }) => {
+      const { subGoals } = await prisma.goal.findUnique({
+        where: {
+          id: goalId,
+        },
+        include: {
+          subGoals: true,
+        },
+      });
+      return subGoals;
+    },
   },
   Mutation: {
     // * User related
@@ -210,25 +229,7 @@ const resolvers = {
       });
       return foundGoal;
     },
-    addSubGoals: async (parent, { goalId, subGoalsArray }, { user }) => {
-      console.log(subGoalsArray);
-      await prisma.goal.update({
-        where: {
-          id: goalId,
-        },
-        data: {
-          subGoals: {
-            set: [...subGoalsArray],
-          },
-        },
-      });
-      const foundGoal = await prisma.goal.findUnique({
-        where: {
-          id: goalId,
-        },
-      });
-      return foundGoal;
-    },
+    addSubGoal: async (parent, { goalId, subGoalId }, { user }) => {},
   },
 };
 
