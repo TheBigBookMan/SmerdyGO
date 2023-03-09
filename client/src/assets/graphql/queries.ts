@@ -124,6 +124,22 @@ export const ADD_GOAL = gql`
   }
 `;
 
+// * SubGoal related
+export const GET_SUB_GOAL = gql`
+  query GetSubGoal($subGoalId: ID!) {
+    getSubGoal(subGoalId: $subGoalId) {
+      id
+      goalId
+      title
+      amount
+      dateCompleted
+      dateToComplete
+      description
+      reward
+    }
+  }
+`;
+
 export const GET_SUB_GOALS = gql`
   query GetSubGoals($goalId: ID!) {
     getSubGoals(goalId: $goalId) {
