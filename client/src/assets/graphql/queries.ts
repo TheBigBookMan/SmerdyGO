@@ -91,13 +91,6 @@ export const GET_GOALS = gql`
       amount
       description
       category
-      subGoals {
-        subgoal
-        dateCompleted
-        dateToComplete
-        description
-        reward
-      }
     }
   }
 `;
