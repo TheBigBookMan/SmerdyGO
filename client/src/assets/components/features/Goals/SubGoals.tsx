@@ -20,7 +20,7 @@ import {
 // ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
   const goalId = selectedGoal?.id;
-  const [enableEditMode, setEnableEditMode] = useState<boolean>(true);
+  const [enableEditMode, setEnableEditMode] = useState<SubGoal | undefined>();
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [enterEditMode, { data: returnedEditData }] =
     useMutation(SUB_GOAL_EDIT);
@@ -40,7 +40,8 @@ const SubGoals = ({ selectedGoal }: any) => {
       setSubGoalList([...listSubGoals]);
     }
   }, [selectedGoal, newSubGoal, databaseSubGoals]);
-  console.log(subGoalList);
+  // console.log(subGoalList);
+  console.log(enableEditMode);
 
   return (
     <div className="w-full h-full p-1 flex flex-col">
@@ -107,9 +108,10 @@ const SubGoals = ({ selectedGoal }: any) => {
                   <div className="flex justify-between items-center p-1 border-b">
                     <h1 className="font-bold">{goal.title}</h1>
                     <AiOutlineEdit
-                      onClick={() =>
-                        enterEditMode({ variables: { subGoalId: goal.id } })
-                      }
+                      onClick={() => {
+                        enterEditMode({ variables: { subGoalId: goal.id } });
+                        setEnableEditMode({ ...goal });
+                      }}
                       className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
                     />
                   </div>
