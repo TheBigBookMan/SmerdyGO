@@ -36,6 +36,10 @@ const typeDefs = gql`
   }
 
   type SubGoal {
+    id: ID
+    goal: Goal
+    goalId: String
+    title: String
     subgoal: Int
     dateCompleted: String
     dateToComplete: String

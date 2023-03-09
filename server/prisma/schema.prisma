@@ -47,7 +47,11 @@ model Goal {
   subGoals SubGoal[]
 }
 
-type SubGoal {
+model SubGoal {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  goal Goal @relation(fields: [goalId], references: [id])
+  goalId String @db.ObjectId
+  title String
   subgoal Int
   dateCompleted String?
   dateToComplete String?
