@@ -124,31 +124,43 @@ export const ADD_GOAL = gql`
   }
 `;
 
-export const ADD_AMOUNT_SUBGOAL = gql`
-  mutation AddAmountSubGoal($goalId: ID!, $numSubGoals: Int!) {
-    addAmountSubGoal(goalId: $goalId, numSubGoals: $numSubGoals) {
-      subGoals {
-        subgoal
-        dateCompleted
-        dateToComplete
-        description
-        reward
-      }
+export const GET_SUB_GOALS = gql`
+  query GetSubGoals($goalId: ID!) {
+    getSubGoals(goalId: $goalId) {
+      id
+      goalId
+      title
+      amount
+      dateCompleted
+      dateToComplete
+      description
+      reward
     }
   }
 `;
 
-export const ADD_SUB_GOALS = gql`
-  mutation AddSubGoals($goalId: ID!, $subGoalsArray: [SubGoals]) {
-    addSubGoals(goalId: $goalId, subGoalsArray: $subGoalsArray) {
-      subGoals {
-        subgoal
-        dateCompleted
-        dateToComplete
-        description
-        reward
-      }
+export const ADD_SUB_GOAL = gql`
+  mutation AddSubGoal(
+    $goalId: ID!
+    $title: String!
+    $amount: Int!
+    $dateToComplete: String
+    $description: String
+    $reward: String
+  ) {
+    addSubGoal(
+      goalId: $goalId
+      title: $title
+      amount: $amount
+      dateToComplete: $dateToComplete
+      description: $description
+      reward: $reward
+    ) {
       id
+      subGoals {
+        id
+        title
+      }
     }
   }
 `;
