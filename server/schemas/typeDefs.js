@@ -67,6 +67,8 @@ const typeDefs = gql`
     getTodos(completeOrNot: Boolean!): [ToDo]
     getGoal(goalId: ID!): Goal
     getGoals: [Goal]
+    getSubGoal(subGoalId: ID): SubGoal
+    getSubGoals: [SubGoal]
   }
 
   type Mutation {
@@ -84,7 +86,7 @@ const typeDefs = gql`
       category: String!
     ): User
     addAmountSubGoal(goalId: ID!, numSubGoals: Int!): Goal
-    addSubGoals(goalId: ID!, subGoalsArray: [SubGoals]): Goal
+    addSubGoal(goalId: ID!, subGoalId: ID!): Goal
   }
 `;
 
