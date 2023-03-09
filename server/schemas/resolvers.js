@@ -212,20 +212,12 @@ const resolvers = {
       return createSubGoal;
     },
     subGoalEdit: async (parent, { subGoalId }, { user }) => {
-      let { editMode } = await prisma.subGoal.findUnique({
-        where: {
-          id: subGoalId,
-        },
-      });
-
-      editMode = !editMode;
-
       const updatedSubGoal = await prisma.subGoal.update({
         where: {
           id: subGoalId,
         },
         data: {
-          editMode,
+          editMode: true,
         },
       });
       return updatedSubGoal;
