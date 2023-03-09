@@ -4,7 +4,7 @@ import { TiTick } from "react-icons/ti";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useMutation, useQuery } from "@apollo/client";
 import {
-  ADD_SUB_GOAL,
+  UPDATE_SUB_GOAL,
   GET_SUB_GOALS,
   GET_SUB_GOAL,
   SUB_GOAL_EDIT,
@@ -27,7 +27,7 @@ const SubGoals = ({ selectedGoal }: any) => {
     variables: { goalId },
   });
   const [addSubGoal, { data: newSubGoal, loading: newSubGoalLoading }] =
-    useMutation(ADD_SUB_GOAL);
+    useMutation(UPDATE_SUB_GOAL);
 
   useEffect(() => {
     const listSubGoals = databaseSubGoals?.getSubGoals;

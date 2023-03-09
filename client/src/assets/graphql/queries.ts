@@ -150,8 +150,8 @@ export const GET_SUB_GOALS = gql`
   }
 `;
 
-export const ADD_SUB_GOAL = gql`
-  mutation AddSubGoal(
+export const UPDATE_SUB_GOAL = gql`
+  mutation UpdateSubGoal(
     $goalId: ID!
     $title: String!
     $amount: Int!

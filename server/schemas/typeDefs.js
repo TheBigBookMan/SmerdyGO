@@ -78,10 +78,11 @@ const typeDefs = gql`
       description: String
       category: String!
     ): User
-    addSubGoal(
-      goalId: ID!
-      title: String!
-      amount: Int!
+    addSubGoal(goalId: ID!): SubGoal
+    updateSubGoal(
+      subGoalId: ID!
+      title: String
+      amount: Int
       dateToComplete: String
       description: String
       reward: String

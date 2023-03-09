@@ -51,8 +51,8 @@ model SubGoal {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   goal Goal @relation(fields: [goalId], references: [id])
   goalId String @db.ObjectId
-  title String
-  amount Int
+  title String?
+  amount Int?
   dateCompleted String?
   dateToComplete String?
   description String?
