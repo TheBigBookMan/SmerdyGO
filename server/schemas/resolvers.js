@@ -152,6 +152,7 @@ const resolvers = {
       //     todos: { push: { title, description, timeframe } },
       //   },
       // });
+
       return createdTodo;
     },
     completeTodo: async (parent, { todoId }, { user }) => {
@@ -200,36 +201,16 @@ const resolvers = {
       });
       return user;
     },
-    addAmountSubGoal: async (parent, { goalId, numSubGoals }, { user }) => {
-      let newArray = [];
-      for (let i = 1; i <= numSubGoals; i++) {
-        newArray.push({
-          subgoal: 0,
-          dateCompleted: "",
-          dateToComplete: "",
-          description: "",
-          reward: "",
-        });
-      }
-      await prisma.goal.update({
-        where: {
-          id: goalId,
-        },
-        data: {
-          subGoals: {
-            set: [...newArray],
-          },
-        },
+    addSubGoal: async (
+      parent,
+      { goalId, title, amount, dateToComplete, description, reward },
+      { user }
+    ) => {
+      const createSubGoal = await prisma.subGoal.create({
+        data: { title, amount, dateToComplete, description, reward, goalId },
       });
-
-      const foundGoal = await prisma.goal.findUnique({
-        where: {
-          id: goalId,
-        },
-      });
-      return foundGoal;
+      return createSubGoal;
     },
-    addSubGoal: async (parent, { goalId, subGoalId }, { user }) => {},
   },
 };
 
