@@ -36,7 +36,11 @@ declare global {
   }
 
   interface SubGoal {
-    subgoal: number;
+    id: string;
+    goal: Goal;
+    goalId: string;
+    title: string;
+    amount: number;
     dateCompleted: string;
     dateToComplete: string;
     description: string;

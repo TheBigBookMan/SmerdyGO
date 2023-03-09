@@ -52,7 +52,7 @@ model SubGoal {
   goal Goal @relation(fields: [goalId], references: [id])
   goalId String @db.ObjectId
   title String
-  subgoal Int
+  amount Int
   dateCompleted String?
   dateToComplete String?
   description String?

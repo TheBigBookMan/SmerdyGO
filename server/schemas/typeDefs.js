@@ -40,15 +40,7 @@ const typeDefs = gql`
     goal: Goal
     goalId: String
     title: String
-    subgoal: Int
-    dateCompleted: String
-    dateToComplete: String
-    description: String
-    reward: String
-  }
-
-  input SubGoals {
-    subgoal: Int
+    amount: Int
     dateCompleted: String
     dateToComplete: String
     description: String
