@@ -128,6 +128,12 @@ export const ADD_SUB_GOAL = gql`
   }
 `;
 
+export const DELETE_SUB_GOAL = gql`
+  mutation DeleteSubGoal($subGoalId: ID!) {
+    deleteSubGoal(subGoalId: $subGoalId)
+  }
+`;
+
 export const GET_SUB_GOAL = gql`
   query GetSubGoal($subGoalId: ID!) {
     getSubGoal(subGoalId: $subGoalId) {

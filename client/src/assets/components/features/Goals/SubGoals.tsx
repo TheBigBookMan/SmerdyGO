@@ -10,6 +10,7 @@ import {
   GET_SUB_GOAL,
   SUB_GOAL_EDIT,
   ADD_SUB_GOAL,
+  DELETE_SUB_GOAL,
 } from "../../../graphql/queries";
 
 // TODO add in the nicer scrollbar for the subgoals section X
@@ -21,6 +22,12 @@ const SubGoals = ({ selectedGoal }: any) => {
   const goalId = selectedGoal?.id;
   // const [enableEditMode, setEnableEditMode] = useState<SubGoal | undefined>();
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
+  const [deleteSubGoal, { data: deletedSubGoal }] = useMutation(
+    DELETE_SUB_GOAL,
+    {
+      refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
+    }
+  );
   const [enterEditMode, { data: returnedEditData }] =
     useMutation(SUB_GOAL_EDIT);
   const { data: databaseSubGoals, loading } = useQuery(GET_SUB_GOALS, {
@@ -129,7 +136,12 @@ const SubGoals = ({ selectedGoal }: any) => {
                   <div className="flex justify-between items-center p-1 border-b">
                     <h1 className="font-bold">{goal.title}</h1>
                     <div className="flex gap-1">
-                      <AiFillDelete className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
+                      <AiFillDelete
+                        onClick={() =>
+                          deleteSubGoal({ variables: { subGoalId: goal.id } })
+                        }
+                        className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                      />
                       <AiOutlineEdit
                         onClick={() => {
                           enterEditMode({ variables: { subGoalId: goal.id } });
