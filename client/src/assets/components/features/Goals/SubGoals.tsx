@@ -13,14 +13,12 @@ import {
 
 // TODO add in the nicer scrollbar for the subgoals section X
 
-// TODO edit button opens up the other component in front to edit the goal
-
-// TODO the add goal button creates new goal component on screen, similar to edit but just with empty spaces
+// TODO will need to add in a way to make the user only able to edit one subgoal at a time because state can only handle one edit mode at a time
 
 // ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
   const goalId = selectedGoal?.id;
-  const [enableEditMode, setEnableEditMode] = useState<SubGoal | undefined>();
+  // const [enableEditMode, setEnableEditMode] = useState<SubGoal | undefined>();
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [enterEditMode, { data: returnedEditData }] =
     useMutation(SUB_GOAL_EDIT);
@@ -40,8 +38,28 @@ const SubGoals = ({ selectedGoal }: any) => {
       setSubGoalList([...listSubGoals]);
     }
   }, [selectedGoal, newSubGoal, databaseSubGoals]);
-  // console.log(subGoalList);
-  console.log(enableEditMode);
+  console.log(subGoalList);
+  // console.log(enableEditMode);
+
+  const getValue = (subGoalId: string) => {
+    let val = subGoalList.find((obj) => obj.id === subGoalId);
+  };
+
+  const changeInput = (e: any, subGoalId: string) => {
+    e.preventDefault();
+    let copySubGoalList = [...subGoalList];
+    let subGoalObject = subGoalList.find((obj) => obj.id === subGoalId);
+    const indexOfSubGoal = subGoalList.findIndex(
+      (item) => item.id === subGoalId
+    );
+    const newSubGoalObject = {
+      ...subGoalObject,
+      [e.target.name]: e.target.value,
+    };
+    copySubGoalList[indexOfSubGoal] = { ...newSubGoalObject };
+
+    setSubGoalList(copySubGoalList);
+  };
 
   return (
     <div className="w-full h-full p-1 flex flex-col">
@@ -98,9 +116,12 @@ const SubGoals = ({ selectedGoal }: any) => {
                 {goal.editMode ? (
                   <div className="flex justify-between items-center p-1 border-b">
                     <input
+                      onChange={(e) => changeInput(e, goal.id)}
                       type="text"
+                      name="title"
                       className="font-bold w-[120px] pl-1 bg-emerald-100 rounded-lg"
-                      placeholder={goal.title ? goal.title : "title..."}
+                      value={goal.title}
+                      placeholder="title..."
                     />
                     <TiTick className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
                   </div>
@@ -110,7 +131,6 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <AiOutlineEdit
                       onClick={() => {
                         enterEditMode({ variables: { subGoalId: goal.id } });
-                        setEnableEditMode({ ...goal });
                       }}
                       className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
                     />
@@ -122,13 +142,12 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <h1 className="font-bold">goal amount:</h1>
                     {goal.editMode ? (
                       <input
+                        onChange={(e) => changeInput(e, goal.id)}
+                        name="amount"
                         type="text"
+                        value={goal.amount}
                         className="bg-emerald-100 pl-1 w-[70px] rounded-lg"
-                        placeholder={`${
-                          selectedGoal.measurement === "$"
-                            ? `${selectedGoal.measurement}${goal.amount}`
-                            : `${goal.amount}${selectedGoal.measurement}`
-                        }`}
+                        placeholder={selectedGoal.measurement}
                       />
                     ) : (
                       <>
@@ -150,8 +169,11 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <h1 className="font-bold">fin-date:</h1>
                     {goal.editMode ? (
                       <input
+                        onChange={(e) => changeInput(e, goal.id)}
+                        name="dateToComplete"
+                        value={goal.dateToComplete}
                         type="text"
-                        placeholder={goal.dateToComplete}
+                        placeholder="fin-date..."
                         className="bg-emerald-100 pl-1 w-[90px] rounded-lg"
                       />
                     ) : (
@@ -162,11 +184,10 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <h1 className="font-bold">description:</h1>
                     {goal.editMode ? (
                       <textarea
-                        placeholder={
-                          goal.description
-                            ? goal.description
-                            : "add description..."
-                        }
+                        onChange={(e) => changeInput(e, goal.id)}
+                        name="description"
+                        value={goal.description}
+                        placeholder="add description..."
                         rows={3}
                         className="bg-emerald-100 p-1 rounded-lg"
                       ></textarea>
@@ -178,10 +199,11 @@ const SubGoals = ({ selectedGoal }: any) => {
                     <h1 className="font-bold">reward:</h1>
                     {goal.editMode ? (
                       <input
+                        onChange={(e) => changeInput(e, goal.id)}
+                        name="reward"
+                        value={goal.reward}
                         type="text"
-                        placeholder={
-                          goal.reward ? goal.reward : "add reward..."
-                        }
+                        placeholder="add reward..."
                         className="bg-emerald-100 pl-1 rounded-lg"
                       />
                     ) : (
