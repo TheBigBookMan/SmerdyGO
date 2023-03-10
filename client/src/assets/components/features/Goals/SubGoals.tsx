@@ -2,6 +2,7 @@ import { ChangeEvent, MouseEvent, useState, useEffect } from "react";
 import { TbPlaylistAdd } from "react-icons/tb";
 import { TiTick } from "react-icons/ti";
 import { AiOutlineEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   UPDATE_SUB_GOAL,
@@ -38,8 +39,6 @@ const SubGoals = ({ selectedGoal }: any) => {
       setSubGoalList([...listSubGoals]);
     }
   }, [selectedGoal, newSubGoal, databaseSubGoals]);
-  console.log(subGoalList);
-  // console.log(enableEditMode);
 
   const getValue = (subGoalId: string) => {
     let val = subGoalList.find((obj) => obj.id === subGoalId);
@@ -123,17 +122,21 @@ const SubGoals = ({ selectedGoal }: any) => {
                       value={goal.title}
                       placeholder="title..."
                     />
+
                     <TiTick className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
                   </div>
                 ) : (
                   <div className="flex justify-between items-center p-1 border-b">
                     <h1 className="font-bold">{goal.title}</h1>
-                    <AiOutlineEdit
-                      onClick={() => {
-                        enterEditMode({ variables: { subGoalId: goal.id } });
-                      }}
-                      className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
-                    />
+                    <div className="flex gap-1">
+                      <AiFillDelete className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
+                      <AiOutlineEdit
+                        onClick={() => {
+                          enterEditMode({ variables: { subGoalId: goal.id } });
+                        }}
+                        className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                      />
+                    </div>
                   </div>
                 )}
 
