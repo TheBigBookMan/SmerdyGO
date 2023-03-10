@@ -34,7 +34,9 @@ const SubGoals = ({ selectedGoal }: any) => {
     variables: { goalId },
   });
   const [updateSubGoal, { data: newSubGoal, loading: newSubGoalLoading }] =
-    useMutation(UPDATE_SUB_GOAL);
+    useMutation(UPDATE_SUB_GOAL, {
+      refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
+    });
   const [addSubGoal, { data: addedSubGoal, loading: loadingAddedSubGoal }] =
     useMutation(ADD_SUB_GOAL, {
       refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
@@ -47,10 +49,6 @@ const SubGoals = ({ selectedGoal }: any) => {
     }
   }, [selectedGoal, newSubGoal, databaseSubGoals]);
 
-  const getValue = (subGoalId: string) => {
-    let val = subGoalList.find((obj) => obj.id === subGoalId);
-  };
-
   const changeInput = (e: any, subGoalId: string) => {
     e.preventDefault();
     let copySubGoalList = [...subGoalList];
@@ -58,9 +56,15 @@ const SubGoals = ({ selectedGoal }: any) => {
     const indexOfSubGoal = subGoalList.findIndex(
       (item) => item.id === subGoalId
     );
+    let value;
+    if (e.target.name === "amount") {
+      value = parseInt(e.target.value);
+    } else {
+      value = e.target.value;
+    }
     const newSubGoalObject = {
       ...subGoalObject,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     };
     copySubGoalList[indexOfSubGoal] = { ...newSubGoalObject };
 
@@ -101,7 +105,7 @@ const SubGoals = ({ selectedGoal }: any) => {
       <div className="flex gap-2 items-center">
         <h1 className="font-bold">add new subgoal</h1>
         <TbPlaylistAdd
-          onClick={() => addSubGoal({ variables: { goalId } })}
+          onClick={() => addSubGoal({ variables: { goalId: selectedGoal.id } })}
           className="font-bold cursor-pointer border-2 rounded-xl w-[30px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
         />
       </div>
@@ -130,7 +134,21 @@ const SubGoals = ({ selectedGoal }: any) => {
                       placeholder="title..."
                     />
 
-                    <TiTick className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all" />
+                    <TiTick
+                      onClick={() =>
+                        updateSubGoal({
+                          variables: {
+                            subGoalId: goal.id,
+                            title: goal.title,
+                            amount: goal.amount,
+                            dateToComplete: goal.dateToComplete,
+                            description: goal.description,
+                            reward: goal.reward,
+                          },
+                        })
+                      }
+                      className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                    />
                   </div>
                 ) : (
                   <div className="flex justify-between items-center p-1 border-b">

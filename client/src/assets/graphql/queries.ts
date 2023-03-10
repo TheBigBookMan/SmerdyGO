@@ -168,15 +168,15 @@ export const GET_SUB_GOALS = gql`
 
 export const UPDATE_SUB_GOAL = gql`
   mutation UpdateSubGoal(
-    $goalId: ID!
-    $title: String!
-    $amount: Int!
+    $subGoalId: ID!
+    $title: String
+    $amount: Int
     $dateToComplete: String
     $description: String
     $reward: String
   ) {
-    addSubGoal(
-      goalId: $goalId
+    updateSubGoal(
+      subGoalId: $subGoalId
       title: $title
       amount: $amount
       dateToComplete: $dateToComplete
