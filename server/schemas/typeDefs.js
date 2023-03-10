@@ -79,6 +79,7 @@ const typeDefs = gql`
       category: String!
     ): User
     addSubGoal(goalId: ID!): SubGoal
+    deleteSubGoal(subGoalId: ID!): Boolean
     updateSubGoal(
       subGoalId: ID!
       title: String
