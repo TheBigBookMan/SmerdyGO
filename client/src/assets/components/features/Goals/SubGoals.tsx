@@ -12,6 +12,7 @@ import {
   ADD_SUB_GOAL,
   DELETE_SUB_GOAL,
 } from "../../../graphql/queries";
+import { ThreeDots } from "react-loader-spinner";
 
 // TODO add in the nicer scrollbar for the subgoals section X
 
@@ -133,22 +134,34 @@ const SubGoals = ({ selectedGoal }: any) => {
                       value={goal.title}
                       placeholder="title..."
                     />
-
-                    <TiTick
-                      onClick={() =>
-                        updateSubGoal({
-                          variables: {
-                            subGoalId: goal.id,
-                            title: goal.title,
-                            amount: goal.amount,
-                            dateToComplete: goal.dateToComplete,
-                            description: goal.description,
-                            reward: goal.reward,
-                          },
-                        })
-                      }
-                      className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
-                    />
+                    {newSubGoalLoading ? (
+                      <ThreeDots
+                        height="20"
+                        width="20"
+                        radius="9"
+                        color="#4fa94d"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                      />
+                    ) : (
+                      <TiTick
+                        onClick={() =>
+                          updateSubGoal({
+                            variables: {
+                              subGoalId: goal.id,
+                              title: goal.title,
+                              amount: goal.amount,
+                              dateToComplete: goal.dateToComplete,
+                              description: goal.description,
+                              reward: goal.reward,
+                            },
+                          })
+                        }
+                        className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                      />
+                    )}
                   </div>
                 ) : (
                   <div className="flex justify-between items-center p-1 border-b">
