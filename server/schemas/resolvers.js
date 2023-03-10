@@ -209,6 +209,15 @@ const resolvers = {
         },
       });
     },
+    deleteSubGoal: async (parent, { subGoalId }, { user }) => {
+      const deletedSubGoal = await prisma.subGoal.delete({
+        where: {
+          id: subGoalId,
+        },
+      });
+      if (deletedSubGoal) return true;
+      else return false;
+    },
     updateSubGoal: async (
       parent,
       { subGoalId, title, amount, dateToComplete, description, reward },
