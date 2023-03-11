@@ -13,7 +13,7 @@ import {
   DELETE_SUB_GOAL,
 } from "../../../graphql/queries";
 import { ThreeDots } from "react-loader-spinner";
-import ProgressBar from "./ProgressBar";
+import ProgressBarComp from "./ProgressBarComp";
 
 // TODO add in the nicer scrollbar for the subgoals section X
 
@@ -22,7 +22,6 @@ import ProgressBar from "./ProgressBar";
 // ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
   const goalId = selectedGoal?.id;
-  // const [enableEditMode, setEnableEditMode] = useState<SubGoal | undefined>();
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [deleteSubGoal, { data: deletedSubGoal }] = useMutation(
     DELETE_SUB_GOAL,
@@ -261,7 +260,7 @@ const SubGoals = ({ selectedGoal }: any) => {
               </li>
             ))}
           </ul>
-          <ProgressBar />
+          <ProgressBarComp />
         </div>
       )}
     </div>
