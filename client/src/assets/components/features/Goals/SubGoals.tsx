@@ -13,6 +13,7 @@ import {
   DELETE_SUB_GOAL,
 } from "../../../graphql/queries";
 import { ThreeDots } from "react-loader-spinner";
+import ProgressBar from "./ProgressBar";
 
 // TODO add in the nicer scrollbar for the subgoals section X
 
@@ -260,12 +261,7 @@ const SubGoals = ({ selectedGoal }: any) => {
               </li>
             ))}
           </ul>
-          <p>
-            potentially add in like a timeline thing for each subgoal with the
-            title and that could probably be the area where the user can change
-            the order of them--- would just be an algorithm that changes the
-            index of the array
-          </p>
+          <ProgressBar />
         </div>
       )}
     </div>
