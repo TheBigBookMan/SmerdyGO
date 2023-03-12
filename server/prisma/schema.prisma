@@ -42,6 +42,7 @@ model Goal {
   title String
   measurement String?
   amount Int
+  amountCompleted Int
   description String?
   category String
   subGoals SubGoal[]
