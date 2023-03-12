@@ -32,6 +32,7 @@ declare global {
 
   interface Goal extends GoalForm {
     subGoals: SubGoal[];
+    amountCompleted: number;
     id: string;
   }
 

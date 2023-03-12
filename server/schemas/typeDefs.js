@@ -30,6 +30,7 @@ const typeDefs = gql`
     title: String
     measurement: String
     amount: Int
+    amountCompleted: Int
     description: String
     category: String
     subGoals: [SubGoal]
