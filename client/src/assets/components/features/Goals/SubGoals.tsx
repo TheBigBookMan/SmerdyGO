@@ -255,7 +255,7 @@ const SubGoals = ({ selectedGoal }: any) => {
                           type="submit"
                           className="mx-auto font-bold cursor-pointer border-2 rounded-xl w-[140px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
                         >
-                          completed...
+                          complete...
                         </button>
                       </div>
                     )}

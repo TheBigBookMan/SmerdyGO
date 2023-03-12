@@ -43,6 +43,7 @@ declare global {
     title: string;
     amount: number;
     dateCompleted: string;
+    isComplete: boolean;
     dateToComplete: string;
     description: string;
     reward: string;
