@@ -251,6 +251,20 @@ const resolvers = {
       });
       return updatedSubGoal;
     },
+    completeSubGoal: async (parent, { subGoalId }, { user }) => {
+      let today = new Date();
+      today = today.toLocaleDateString();
+      const completedSubGoal = await prisma.subGoal.update({
+        where: {
+          id: subGoalId,
+        },
+        data: {
+          isComplete: true,
+          dateCompleted: today,
+        },
+      });
+      return completedSubGoal;
+    },
   },
 };
 

@@ -169,12 +169,16 @@ const SubGoals = ({ selectedGoal }: any) => {
                         }
                         className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
                       />
-                      <AiOutlineEdit
-                        onClick={() => {
-                          enterEditMode({ variables: { subGoalId: goal.id } });
-                        }}
-                        className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
-                      />
+                      {!goal.isComplete && (
+                        <AiOutlineEdit
+                          onClick={() => {
+                            enterEditMode({
+                              variables: { subGoalId: goal.id },
+                            });
+                          }}
+                          className="font-bold cursor-pointer border-2 rounded-lg w-[25px] h-[25px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                        />
+                      )}
                     </div>
                   </div>
                 )}
@@ -251,12 +255,21 @@ const SubGoals = ({ selectedGoal }: any) => {
                     ) : (
                       <div className="flex flex-col">
                         <p>{goal.reward}</p>
-                        <button
-                          type="submit"
-                          className="mx-auto font-bold cursor-pointer border-2 rounded-xl w-[140px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
-                        >
-                          complete...
-                        </button>
+                        {goal.isComplete ? (
+                          <button
+                            disabled
+                            className="mx-auto font-bold text-gray-400 border-2 rounded-xl w-[140px] h-[30px] bg-gray-200"
+                          >
+                            completed...
+                          </button>
+                        ) : (
+                          <button
+                            type="submit"
+                            className="mx-auto font-bold cursor-pointer border-2 rounded-xl w-[140px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                          >
+                            complete...
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>

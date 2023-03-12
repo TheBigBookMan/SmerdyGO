@@ -55,7 +55,7 @@ model SubGoal {
   title String?
   amount Int?
   dateCompleted String?
-  isComplete Boolean?
+  isComplete Boolean? @default(false)
   dateToComplete String?
   description String?
   reward String?
