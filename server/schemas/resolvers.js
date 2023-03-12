@@ -54,6 +54,7 @@ const resolvers = {
     },
     // * Goals related
     getGoals: async (parent, args, { user }) => {
+      console.log(user);
       const { id } = user;
       const { goals } = await prisma.user.findUnique({
         where: {
@@ -194,6 +195,7 @@ const resolvers = {
           title,
           measurement,
           amount,
+          amountCompleted: 0,
           description,
           category,
           authorId: id,

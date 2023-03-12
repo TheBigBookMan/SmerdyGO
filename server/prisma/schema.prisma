@@ -41,8 +41,8 @@ model Goal {
   authorId String @db.ObjectId
   title String
   measurement String?
-  amount Int
-  amountCompleted Int
+  amount Int 
+  amountCompleted Int? @default(0)
   description String?
   category String
   subGoals SubGoal[]

@@ -89,6 +89,7 @@ export const GET_GOALS = gql`
       title
       measurement
       amount
+      amountCompleted
       description
       category
     }
@@ -151,7 +152,7 @@ export const GET_SUB_GOAL = gql`
 `;
 
 export const GET_SUB_GOALS = gql`
-  query GetSubGoals($goalId: ID!) {
+  query GetSubGoals($goalId: ID) {
     getSubGoals(goalId: $goalId) {
       id
       goalId

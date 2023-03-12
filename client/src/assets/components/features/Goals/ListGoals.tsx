@@ -48,7 +48,7 @@ const ListGoals = ({ selectedGoal, setSelectedGoal, getList }: any) => {
             ))}
           </select>
         </div>
-        <ul className="flex flex-col gap-1 p-2 h-full w-full overflow-y-auto ">
+        <ul className="flex flex-col gap-1 p-2 h-[140px] w-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-emerald-100 scrollbar-thumb-rounded-xl scrollbar-track-rounded-xl">
           {!filteredList ? (
             <h1 className="text-emerald-500 font-bold">choose category...</h1>
           ) : (
