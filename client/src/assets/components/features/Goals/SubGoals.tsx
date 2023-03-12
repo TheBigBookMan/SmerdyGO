@@ -118,7 +118,7 @@ const SubGoals = ({ selectedGoal }: any) => {
             {subGoalList.map((goal, idx) => (
               <li
                 key={`${goal}${idx}`}
-                className="flex  flex-col border-2 rounded-xl h-[240px] w-[200px] overflow-y-auto"
+                className="flex pr-1 flex-col border-2 rounded-xl h-[240px] w-[200px] overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-gray-100 scrollbar-thumb-rounded-xl scrollbar-track-rounded-xl"
               >
                 {goal.editMode ? (
                   <div className="flex justify-between items-center p-1 border-b">
