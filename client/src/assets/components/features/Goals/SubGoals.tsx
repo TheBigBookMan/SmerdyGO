@@ -22,15 +22,12 @@ import ProgressBarComp from "./ProgressBarComp";
 // ! FIX ANY
 const SubGoals = ({ selectedGoal }: any) => {
   const goalId = selectedGoal?.id;
+  const goalAmount = selectedGoal?.amount;
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
-  const [deleteSubGoal, { data: deletedSubGoal }] = useMutation(
-    DELETE_SUB_GOAL,
-    {
-      refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
-    }
-  );
-  const [enterEditMode, { data: returnedEditData }] =
-    useMutation(SUB_GOAL_EDIT);
+  const [deleteSubGoal] = useMutation(DELETE_SUB_GOAL, {
+    refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
+  });
+  const [enterEditMode] = useMutation(SUB_GOAL_EDIT);
   const { data: databaseSubGoals, loading } = useQuery(GET_SUB_GOALS, {
     variables: { goalId },
   });
@@ -38,10 +35,9 @@ const SubGoals = ({ selectedGoal }: any) => {
     useMutation(UPDATE_SUB_GOAL, {
       refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
     });
-  const [addSubGoal, { data: addedSubGoal, loading: loadingAddedSubGoal }] =
-    useMutation(ADD_SUB_GOAL, {
-      refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
-    });
+  const [addSubGoal] = useMutation(ADD_SUB_GOAL, {
+    refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
+  });
 
   useEffect(() => {
     const listSubGoals = databaseSubGoals?.getSubGoals;
@@ -253,14 +249,22 @@ const SubGoals = ({ selectedGoal }: any) => {
                         className="bg-emerald-100 pl-1 rounded-lg"
                       />
                     ) : (
-                      <p>{goal.reward}</p>
+                      <div className="flex flex-col">
+                        <p>{goal.reward}</p>
+                        <button
+                          type="submit"
+                          className="mx-auto font-bold cursor-pointer border-2 rounded-xl w-[140px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
+                        >
+                          completed...
+                        </button>
+                      </div>
                     )}
                   </div>
                 </div>
               </li>
             ))}
           </ul>
-          <ProgressBarComp />
+          <ProgressBarComp goalAmount={goalAmount} subGoalList={subGoalList} />
         </div>
       )}
     </div>
