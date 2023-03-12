@@ -43,6 +43,7 @@ const typeDefs = gql`
     title: String
     amount: Int
     dateCompleted: String
+    isComplete: Boolean
     dateToComplete: String
     description: String
     reward: String

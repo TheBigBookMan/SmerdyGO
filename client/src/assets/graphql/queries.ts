@@ -143,6 +143,7 @@ export const GET_SUB_GOAL = gql`
       title
       amount
       dateCompleted
+      isComplete
       dateToComplete
       description
       reward
@@ -159,6 +160,7 @@ export const GET_SUB_GOALS = gql`
       title
       amount
       dateCompleted
+      isComplete
       dateToComplete
       description
       reward
@@ -201,6 +203,7 @@ export const SUB_GOAL_EDIT = gql`
       title
       amount
       dateCompleted
+      isComplete
       dateToComplete
       description
       reward
