@@ -24,6 +24,7 @@ import ProgressBarComp from "./ProgressBarComp";
 const SubGoals = ({ selectedGoal }: any) => {
   const goalId = selectedGoal?.id;
   const goalAmount = selectedGoal?.amount;
+
   const [subGoalList, setSubGoalList] = useState<SubGoal[]>([]);
   const [deleteSubGoal] = useMutation(DELETE_SUB_GOAL, {
     refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
@@ -39,7 +40,7 @@ const SubGoals = ({ selectedGoal }: any) => {
   const [addSubGoal] = useMutation(ADD_SUB_GOAL, {
     refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
   });
-  const [completeSubGoal, { data: goalCompletedAmount }] = useMutation(
+  const [completeSubGoal, { data: updatedGoalCompletedAmount }] = useMutation(
     COMPLETE_SUB_GOAL,
     {
       refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
@@ -290,9 +291,9 @@ const SubGoals = ({ selectedGoal }: any) => {
             ))}
           </ul>
           <ProgressBarComp
-            goalAmount={goalAmount}
+            selectedGoal={selectedGoal}
             subGoalList={subGoalList}
-            goalCompletedAmount={goalCompletedAmount}
+            updatedGoalCompletedAmount={updatedGoalCompletedAmount}
           />
         </div>
       )}
