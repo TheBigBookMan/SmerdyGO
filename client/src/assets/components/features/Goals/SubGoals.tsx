@@ -11,6 +11,7 @@ import {
   SUB_GOAL_EDIT,
   ADD_SUB_GOAL,
   DELETE_SUB_GOAL,
+  COMPLETE_SUB_GOAL,
 } from "../../../graphql/queries";
 import { ThreeDots } from "react-loader-spinner";
 import ProgressBarComp from "./ProgressBarComp";
@@ -38,6 +39,12 @@ const SubGoals = ({ selectedGoal }: any) => {
   const [addSubGoal] = useMutation(ADD_SUB_GOAL, {
     refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
   });
+  const [completeSubGoal, { data: goalCompletedAmount }] = useMutation(
+    COMPLETE_SUB_GOAL,
+    {
+      refetchQueries: [{ query: GET_SUB_GOALS, variables: { goalId } }],
+    }
+  );
 
   useEffect(() => {
     const listSubGoals = databaseSubGoals?.getSubGoals;
@@ -264,6 +271,11 @@ const SubGoals = ({ selectedGoal }: any) => {
                           </button>
                         ) : (
                           <button
+                            onClick={() =>
+                              completeSubGoal({
+                                variables: { subGoalId: goal.id },
+                              })
+                            }
                             type="submit"
                             className="mx-auto font-bold cursor-pointer border-2 rounded-xl w-[140px] h-[30px] hover:bg-emerald-300 bg-emerald-200 hover:border-emerald-200 transition-all"
                           >
@@ -277,7 +289,11 @@ const SubGoals = ({ selectedGoal }: any) => {
               </li>
             ))}
           </ul>
-          <ProgressBarComp goalAmount={goalAmount} subGoalList={subGoalList} />
+          <ProgressBarComp
+            goalAmount={goalAmount}
+            subGoalList={subGoalList}
+            goalCompletedAmount={goalCompletedAmount}
+          />
         </div>
       )}
     </div>

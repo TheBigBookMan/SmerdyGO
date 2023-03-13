@@ -3,10 +3,15 @@ import ProgressBar from "@ramonak/react-progress-bar";
 // todo potentially add in like a timeline thing for each subgoal with the title and that could probably be the area where the user can change the orderof them--- would just be an algorithm that changes the index of thearray
 
 //!!!!! FIX ANY
-const ProgressBarComp = ({ goalAmount, subGoalList }: any) => {
+const ProgressBarComp = ({
+  goalAmount,
+  subGoalList,
+  goalCompletedAmount,
+}: any) => {
   //todo need a function that calculates the percent of the progress done by the goal amount
   console.log(goalAmount);
   console.log(subGoalList);
+  console.log(goalCompletedAmount);
   return (
     <div>
       <h1 className="font-bold">progress</h1>

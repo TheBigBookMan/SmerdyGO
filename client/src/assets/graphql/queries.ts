@@ -211,3 +211,15 @@ export const SUB_GOAL_EDIT = gql`
     }
   }
 `;
+
+export const COMPLETE_SUB_GOAL = gql`
+  mutation CompleteSubGoal($subGoalId: ID!) {
+    completeSubGoal(subGoalId: $subGoalId) {
+      id
+      title
+      measurement
+      amount
+      amountCompleted
+    }
+  }
+`;

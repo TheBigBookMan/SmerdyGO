@@ -263,7 +263,18 @@ const resolvers = {
           dateCompleted: today,
         },
       });
-      return completedSubGoal;
+      const amountSubGoalCompleted = completedSubGoal.amount;
+      const { goalId } = completedSubGoal;
+      const goalProgress = await prisma.goal.update({
+        where: {
+          id: goalId,
+        },
+        data: {
+          amountCompleted: amountSubGoalCompleted,
+        },
+      });
+
+      return goalProgress;
     },
   },
 };

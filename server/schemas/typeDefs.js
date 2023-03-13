@@ -91,7 +91,7 @@ const typeDefs = gql`
       reward: String
     ): Goal
     subGoalEdit(subGoalId: ID!): SubGoal
-    completeSubGoal(subGoalId: ID!): SubGoal
+    completeSubGoal(subGoalId: ID!): Goal
   }
 `;
 
